@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>About My Ambition · 나의 야망에 대하여 — About Freedom</title>
-<meta name="description" content="나는 야망이 큰 사람인지 아닌지 알아봅니다. 12문항, 약 8분, 6가지 유형.">
+<meta name="description" content="나는 야망이 큰 사람인지 아닌지 알아봅니다. 24문항, 약 12~16분, 6가지 유형.">
 
 <meta property="og:title" content="About My Ambition · 나의 야망에 대하여">
 <meta property="og:description" content="나는 야망이 큰 사람인지 아닌지 알아봅니다.">
@@ -1053,8 +1053,8 @@ body {
     </p>
 
     <div class="intro-meta">
-      <span>12문항</span>
-      <span>약 8분</span>
+      <span>24문항</span>
+      <span>약 12~16분</span>
       <span>6가지 유형</span>
     </div>
 
@@ -1073,11 +1073,11 @@ body {
   <section class="quiz" id="quiz">
     <div class="progress-bar">
       <div class="progress-info">
-        <span><span class="progress-current" id="progressNum">01</span><span class="progress-total"> / 12</span></span>
+        <span><span class="progress-current" id="progressNum">01</span><span class="progress-total"> / 24</span></span>
         <span class="progress-section" id="sectionLabel">현재의 나</span>
       </div>
       <div class="progress-track">
-        <div class="progress-fill" id="progressFill" style="width: 8.33%"></div>
+        <div class="progress-fill" id="progressFill" style="width: 4.17%"></div>
       </div>
     </div>
 
@@ -1147,129 +1147,249 @@ body {
 // 각 선택지는 fuel 카테고리에 1점, intensity 점수 부여
 
 const questions = [
-  // === SECTION 1: 현재의 나 (Q1-4) ===
+  // === SECTION 1: 현재의 나 (Q1-8) ===
   {
     section: '현재의 나',
-    text: '"이 정도면 일이 다 끝났다"는 감각은 언제 찾아오나요?',
+    text: '일을 끝냈을 때 "이제 됐다"는 감각은 언제 옵니까?',
     options: [
-      { text: '남들이 요구한 마감과 기준을 무사히 통과했을 때', fuel: 'duty', intensity: 30 },
-      { text: '내 눈에 보이는 작은 거슬림까지 다 손봐서 내 기준을 만족시켰을 때', fuel: 'joy', intensity: 85 },
-      { text: '예상보다 좋은 평가나 인정을 받았을 때', fuel: 'ego', intensity: 70 },
-      { text: '딱히 명확한 끝을 느끼지 못한다. 그저 다음 일로 넘어간다', fuel: 'duty', intensity: 50 }
+      { text: '정해진 기준을 다 충족시켰을 때', fuel: 'duty', intensity: 45 },
+      { text: '누군가가 알아보고 인정해줬을 때', fuel: 'ego', intensity: 65 },
+      { text: '내가 보기에도 흠잡을 데 없을 때까지 손봤을 때', fuel: 'joy', intensity: 85 },
+      { text: '끝났는지 잘 모르겠다. 그냥 다음으로 넘어간다', fuel: 'duty', intensity: 25 }
     ]
   },
   {
     section: '현재의 나',
     text: '큰 성과를 냈을 때 가장 먼저 드는 생각은?',
     options: [
-      { text: '드디어 해냈어. 이제 좀 쉬어도 되겠다', fuel: 'duty', intensity: 40 },
-      { text: '다행이다. 다음엔 어떻게 더 매끄럽게 할 수 있을까', fuel: 'joy', intensity: 90 },
-      { text: '봤지? 내가 해낼 거라고 했잖아', fuel: 'ego', intensity: 80 },
-      { text: '특별한 감흥이 없다. 그냥 다음 할 일을 본다', fuel: 'duty', intensity: 60 }
+      { text: '다행이다. 다음에는 더 잘하고 싶다', fuel: 'joy', intensity: 65 },
+      { text: '이제 좀 쉬어도 되겠다', fuel: 'duty', intensity: 45 },
+      { text: '봐라, 내가 해낼 거라고 했다', fuel: 'ego', intensity: 85 },
+      { text: '별 감흥 없다. 다음 일이 보인다', fuel: 'ego', intensity: 25 }
     ]
   },
   {
     section: '현재의 나',
-    text: '주말이나 휴식 시간에 일에 대한 생각이 떠오를 때 당신은',
-    options: [
-      { text: '의식적으로 차단한다. 쉴 때는 쉬는 게 맞다', fuel: 'joy', intensity: 35 },
-      { text: '대수롭지 않게 메모해두고 평일에 처리한다', fuel: 'duty', intensity: 55 },
-      { text: '아예 노트북을 열고 그 자리에서 마무리해버린다', fuel: 'duty', intensity: 90 },
-      { text: '머릿속으로 자연스럽게 그 문제를 이리저리 굴려본다', fuel: 'joy', intensity: 75 }
-    ]
-  },
-  {
-    section: '현재의 나',
-    text: '주변에서 "왜 그렇게까지 해?"라는 말을 들을 때 당신은',
+    text: '주변에서 "왜 그렇게까지 해?"라는 말을 들을 때 당신은?',
     options: [
       { text: '들어본 적이 거의 없다', fuel: 'duty', intensity: 25 },
-      { text: '듣긴 했지만 나는 그게 당연한 수준이라고 느낀다', fuel: 'duty', intensity: 85 },
-      { text: '그러게, 너무 무리했나 싶다가도 결국 또 그렇게 한다', fuel: 'duty', intensity: 80 },
-      { text: '나도 모른다. 그냥 거기까지 가야 직성이 풀린다', fuel: 'joy', intensity: 90 }
+      { text: '그러게, 가끔은 나도 의문이지만 결국 또 그렇게 한다', fuel: 'duty', intensity: 85 },
+      { text: '그게 내 기준이라 그렇다. 별일 아니다', fuel: 'joy', intensity: 45 },
+      { text: '그 말을 듣는 순간이 좋다. 그만큼 했다는 뜻이니까', fuel: 'ego', intensity: 85 }
+    ]
+  },
+  {
+    section: '현재의 나',
+    text: '주말에 일에 대한 생각이 떠오를 때 당신은?',
+    options: [
+      { text: '의식적으로 차단한다. 쉴 때는 쉰다', fuel: 'duty', intensity: 25 },
+      { text: '메모해두고 평일에 처리한다', fuel: 'duty', intensity: 45 },
+      { text: '머릿속으로 자연스럽게 그 문제를 굴려본다', fuel: 'joy', intensity: 65 },
+      { text: '자리에 앉아 그 자리에서 마무리해버린다', fuel: 'duty', intensity: 85 }
+    ]
+  },
+  {
+    section: '현재의 나',
+    text: '평소 자기 일에 매기는 기준은 어떻습니까?',
+    options: [
+      { text: '남들 정도면 충분하다', fuel: 'ego', intensity: 25 },
+      { text: '맡은 만큼은 해야 한다는 선이 있다', fuel: 'duty', intensity: 45 },
+      { text: '내가 정한 기준이 따로 있고, 거기에 맞춘다', fuel: 'joy', intensity: 65 },
+      { text: '늘 더 높은 기준이 보인다. 거기까지 가야 한다', fuel: 'ego', intensity: 85 }
+    ]
+  },
+  {
+    section: '현재의 나',
+    text: '누군가 당신에게 일을 부탁하면?',
+    options: [
+      { text: '가능한 선 안에서 도와준다', fuel: 'duty', intensity: 45 },
+      { text: '거절을 잘 못한다. 결국 떠안는다', fuel: 'duty', intensity: 85 },
+      { text: '내가 잘할 수 있는 일이면 흔쾌히 한다', fuel: 'joy', intensity: 65 },
+      { text: '도움 줄 기회로 본다. 좋은 평판이 되기도 한다', fuel: 'ego', intensity: 25 }
+    ]
+  },
+  {
+    section: '현재의 나',
+    text: '사람들과 비교하는 마음이 들 때 당신은?',
+    options: [
+      { text: '거의 안 든다. 그쪽에 관심이 없다', fuel: 'ego', intensity: 25 },
+      { text: '인정한다. 내가 어디쯤인지 늘 의식한다', fuel: 'ego', intensity: 85 },
+      { text: '비교보다는 내가 어제보다 나아졌나가 더 신경 쓰인다', fuel: 'joy', intensity: 45 },
+      { text: '내가 맡은 책임을 잘 해내고 있는지가 더 중요하다', fuel: 'duty', intensity: 65 }
+    ]
+  },
+  {
+    section: '현재의 나',
+    text: '하루를 마감할 때 보통 어떤 감각이 듭니까?',
+    options: [
+      { text: '오늘도 무사히 지나갔다', fuel: 'duty', intensity: 45 },
+      { text: '오늘 한 일이 또렷이 떠오른다. 다음에 이어가야 할 것도', fuel: 'joy', intensity: 65 },
+      { text: '부족했던 부분이 자꾸 떠오른다. 내일은 더 잘해야 한다', fuel: 'ego', intensity: 85 },
+      { text: '별 감흥 없다. 그냥 잔다', fuel: 'joy', intensity: 25 }
     ]
   },
 
-  // === SECTION 2: 나를 움직이는 것 (Q5-8) ===
+  // === SECTION 2: 나를 움직이는 것 (Q9-16) ===
   {
     section: '나를 움직이는 것',
-    text: '늦은 밤까지 잠을 줄여가며 무언가에 몰두하게 만드는 가장 강력한 힘은?',
+    text: '늦은 밤까지 잠을 줄여가며 무언가에 몰두하게 만드는 가장 강한 힘은?',
     options: [
-      { text: '맡은 일에 차질이 생기거나 누군가에게 폐를 끼치고 싶지 않은 마음', fuel: 'duty', intensity: 80 },
-      { text: '뒤처지기 싫고, 나를 증명해 보이고 싶은 마음', fuel: 'ego', intensity: 80 },
-      { text: '이 문제가 어떻게 풀리는지 끝까지 보고 싶은 호기심', fuel: 'joy', intensity: 80 },
-      { text: '딱히 그렇게까지 몰두하는 일은 잘 없다', fuel: 'duty', intensity: 30 }
+      { text: '누군가에게 폐 끼치고 싶지 않은 마음', fuel: 'duty', intensity: 85 },
+      { text: '뒤처지기 싫고, 인정받고 싶은 마음', fuel: 'ego', intensity: 85 },
+      { text: '이 문제가 어떻게 풀리는지 끝까지 보고 싶은 호기심', fuel: 'joy', intensity: 65 },
+      { text: '그렇게까지 몰두하는 일이 잘 없다', fuel: 'ego', intensity: 25 }
     ]
   },
   {
     section: '나를 움직이는 것',
     text: '아무도 보지 않는 일에 들이는 정성의 양은?',
     options: [
-      { text: '보는 사람이 있을 때와 거의 같다. 내 기준이 따로 있다', fuel: 'joy', intensity: 90 },
-      { text: '솔직히 줄어든다. 효율을 따지는 편이다', fuel: 'ego', intensity: 50 },
-      { text: '오히려 더 신경 쓴다. 나중에 누가 봐도 부끄럽지 않아야 한다', fuel: 'duty', intensity: 85 },
-      { text: '필요한 만큼만 한다. 과한 것도 부족한 것도 싫다', fuel: 'duty', intensity: 45 }
+      { text: '보는 사람이 있을 때와 거의 같다', fuel: 'joy', intensity: 85 },
+      { text: '줄어든다. 효율을 따지는 편이다', fuel: 'ego', intensity: 45 },
+      { text: '오히려 더 신경 쓴다. 누가 봐도 부끄럽지 않아야 한다', fuel: 'duty', intensity: 65 },
+      { text: '필요한 만큼만 한다', fuel: 'duty', intensity: 25 }
     ]
   },
   {
     section: '나를 움직이는 것',
-    text: '당신이 어떤 일을 시작할 때 가장 먼저 떠올리는 것은?',
+    text: '새 일을 시작할 때 가장 먼저 떠올리는 것은?',
     options: [
-      { text: '이 일이 누구에게 도움이 되고 누구에게 닿을지', fuel: 'duty', intensity: 70 },
-      { text: '이 일을 통해 내가 어디까지 갈 수 있을지', fuel: 'ego', intensity: 75 },
-      { text: '이 일이 얼마나 재미있을지, 무엇을 배울 수 있을지', fuel: 'joy', intensity: 75 },
-      { text: '얼마나 걸리고 어떻게 끝낼지의 동선', fuel: 'duty', intensity: 55 }
+      { text: '이 일이 누구에게 닿을지, 누구를 돕는지', fuel: 'duty', intensity: 65 },
+      { text: '이 일을 통해 내가 어디까지 갈 수 있을지', fuel: 'ego', intensity: 85 },
+      { text: '이 일이 얼마나 재미있을지, 무엇을 배울지', fuel: 'joy', intensity: 45 },
+      { text: '얼마나 걸리고 어떻게 끝낼지의 동선', fuel: 'joy', intensity: 25 }
     ]
   },
   {
     section: '나를 움직이는 것',
     text: '당신의 성취 뒤에 더 큰 비중을 차지한 것은?',
     options: [
-      { text: '간절히 원해서 끌어당긴 것에 가깝다', fuel: 'ego', intensity: 75 },
-      { text: '눈앞의 일에 몰입하다 자연스럽게 따라온 것에 가깝다', fuel: 'joy', intensity: 80 },
-      { text: '책임감으로 버티다 보니 어느새 도착해 있었다', fuel: 'duty', intensity: 80 },
-      { text: '운이나 타이밍이 컸다고 느낀다', fuel: 'duty', intensity: 40 }
+      { text: '간절히 원해서 끌어당긴 것에 가깝다', fuel: 'ego', intensity: 85 },
+      { text: '눈앞의 일에 몰입하다 자연스럽게 따라온 것에 가깝다', fuel: 'joy', intensity: 65 },
+      { text: '책임감으로 버티다 보니 어느새 도착해 있었다', fuel: 'duty', intensity: 45 },
+      { text: '운이나 타이밍이 컸다', fuel: 'ego', intensity: 25 }
+    ]
+  },
+  {
+    section: '나를 움직이는 것',
+    text: '당신을 가장 강하게 움직이는 보상은?',
+    options: [
+      { text: '"그게 가능했어?"라는 놀람 어린 인정', fuel: 'ego', intensity: 85 },
+      { text: '누군가가 "이 사람 덕분이다"라고 말하는 자리', fuel: 'duty', intensity: 65 },
+      { text: '내가 만든 결과물이 내 마음에 드는 순간', fuel: 'joy', intensity: 65 },
+      { text: '별다른 보상이 필요 없다. 그냥 한다', fuel: 'joy', intensity: 25 }
+    ]
+  },
+  {
+    section: '나를 움직이는 것',
+    text: '일에 막혔을 때 당신을 다시 일으키는 것은?',
+    options: [
+      { text: '"여기서 멈출 순 없다"는 자존심', fuel: 'ego', intensity: 85 },
+      { text: '"내가 안 하면 누가 하나"라는 책임감', fuel: 'duty', intensity: 85 },
+      { text: '"이 부분이 어떻게 풀릴까"라는 호기심', fuel: 'joy', intensity: 45 },
+      { text: '그냥 한 번 쉬고 다시 본다', fuel: 'joy', intensity: 25 }
+    ]
+  },
+  {
+    section: '나를 움직이는 것',
+    text: '새로운 영역에 도전할지 망설일 때 결정 기준은?',
+    options: [
+      { text: '잘할 수 있을 것 같으면 한다. 실패가 두렵다', fuel: 'ego', intensity: 65 },
+      { text: '누가 부탁하거나 필요하다면 한다', fuel: 'duty', intensity: 45 },
+      { text: '끌리면 한다. 잘할지는 그다음 문제다', fuel: 'joy', intensity: 85 },
+      { text: '굳이 새로운 영역을 찾지 않는다', fuel: 'duty', intensity: 25 }
+    ]
+  },
+  {
+    section: '나를 움직이는 것',
+    text: '일에서 가장 만족스러운 순간은?',
+    options: [
+      { text: '누구도 흉내 못 낼 결과를 냈을 때', fuel: 'ego', intensity: 85 },
+      { text: '맡은 일이 무사히 마무리됐을 때', fuel: 'duty', intensity: 45 },
+      { text: '작업 중에 시간 가는 줄 모르고 빠져 있을 때', fuel: 'joy', intensity: 65 },
+      { text: '다른 사람이 그 일을 잘 이어받을 수 있게 정리됐을 때', fuel: 'duty', intensity: 65 }
     ]
   },
 
-  // === SECTION 3: 갈망과 회복 (Q9-12) ===
+  // === SECTION 3: 갈망과 회복 (Q17-24) ===
   {
     section: '갈망과 회복',
     text: '실패했을 때 당신의 가장 솔직한 반응은?',
     options: [
-      { text: '오기가 생겨서라도 다른 길을 찾는다', fuel: 'ego', intensity: 90 },
-      { text: '잠시 무너지지만, 결국 그 경험을 정리해 다음에 활용한다', fuel: 'joy', intensity: 80 },
-      { text: '내 책임을 곱씹으며 같은 실수를 반복하지 않으려 한다', fuel: 'duty', intensity: 75 },
-      { text: '이 길은 내 길이 아닐 수도 있다고 받아들인다', fuel: 'joy', intensity: 35 }
+      { text: '오기가 생긴다. 다른 길을 찾아낸다', fuel: 'ego', intensity: 85 },
+      { text: '잠시 무너지지만, 결국 그 경험을 정리해 다음에 활용한다', fuel: 'joy', intensity: 65 },
+      { text: '내 책임을 곱씹는다. 같은 실수를 안 하려 한다', fuel: 'duty', intensity: 65 },
+      { text: '이 길은 내 길이 아닐 수도 있다고 받아들인다', fuel: 'joy', intensity: 25 }
     ]
   },
   {
     section: '갈망과 회복',
-    text: '문득 모든 걸 내려놓고 강물 소리만 듣는 단순한 삶을 꿈꿀 때 그 이유는?',
+    text: '모든 걸 내려놓고 단순한 삶을 꿈꿀 때 그 이유는?',
     options: [
-      { text: '지금 짊어진 것들이 너무 무겁고 도망치고 싶어서', fuel: 'duty', intensity: 70 },
-      { text: '소음을 끄고 가장 본질적인 것에만 깊이 몰입하고 싶어서', fuel: 'joy', intensity: 70 },
-      { text: '딱히 그런 갈망은 없다. 나는 지금이 좋다', fuel: 'duty', intensity: 25 },
-      { text: '인정과 평가에서 자유로워지고 싶어서', fuel: 'ego', intensity: 40 }
+      { text: '짊어진 것들이 너무 무겁고 도망치고 싶다', fuel: 'duty', intensity: 85 },
+      { text: '본질적인 것에만 깊이 몰입하고 싶다', fuel: 'joy', intensity: 45 },
+      { text: '인정과 평가에서 자유로워지고 싶다', fuel: 'ego', intensity: 65 },
+      { text: '그런 갈망은 없다. 지금이 좋다', fuel: 'duty', intensity: 25 }
     ]
   },
   {
     section: '갈망과 회복',
-    text: '당신이 진짜 원하는 영향력의 모양은?',
+    text: '진짜 원하는 영향력의 모양은?',
     options: [
-      { text: '내 한 몸과 가까운 사람이 평온하면 충분하다', fuel: 'duty', intensity: 30 },
-      { text: '내 분야에서 또렷한 흔적을 남기고 인정받고 싶다', fuel: 'ego', intensity: 85 },
-      { text: '나의 깨달음이 누군가의 삶에 작은 변화로 닿았으면 좋겠다', fuel: 'joy', intensity: 75 },
-      { text: '내가 만든 것이 오래오래 누군가에게 쓸모 있기를 바란다', fuel: 'duty', intensity: 70 }
+      { text: '내 분야에서 또렷한 흔적을 남기고 인정받는 것', fuel: 'ego', intensity: 85 },
+      { text: '내가 만든 것이 오래오래 누군가에게 쓸모 있는 것', fuel: 'duty', intensity: 65 },
+      { text: '나의 통찰이 누군가의 삶에 작은 변화로 닿는 것', fuel: 'joy', intensity: 45 },
+      { text: '내 한 몸과 가까운 사람이 평온하면 충분하다', fuel: 'duty', intensity: 25 }
     ]
   },
   {
     section: '갈망과 회복',
-    text: '다음 중 당신이 가장 부러워하는 사람은?',
+    text: '다음 중 가장 부러운 사람은?',
     options: [
       { text: '치열하게 정상에 오른 사람', fuel: 'ego', intensity: 85 },
-      { text: '복잡한 것을 단순하게 만들어내는 장인', fuel: 'joy', intensity: 80 },
-      { text: '주변 모두에게 든든한 사람으로 기억되는 사람', fuel: 'duty', intensity: 75 },
-      { text: '아무것도 증명하지 않고 평온하게 사는 사람', fuel: 'joy', intensity: 30 }
+      { text: '복잡한 것을 단순하게 만들어내는 장인', fuel: 'joy', intensity: 65 },
+      { text: '주변 모두에게 든든한 사람으로 기억되는 사람', fuel: 'duty', intensity: 65 },
+      { text: '아무것도 증명하지 않고 평온하게 사는 사람', fuel: 'ego', intensity: 25 }
+    ]
+  },
+  {
+    section: '갈망과 회복',
+    text: '회복이 필요한 시점이 왔을 때, 어디서 회복합니까?',
+    options: [
+      { text: '혼자만의 시간에서. 아무것도 하지 않는 시간', fuel: 'ego', intensity: 25 },
+      { text: '가까운 사람들과의 대화에서', fuel: 'duty', intensity: 45 },
+      { text: '내가 좋아하는 작업이나 취미에서', fuel: 'joy', intensity: 65 },
+      { text: '또 다른 일에서. 멈추면 더 안 좋아진다', fuel: 'duty', intensity: 85 }
+    ]
+  },
+  {
+    section: '갈망과 회복',
+    text: '5년 후 당신이 어떤 자리에 있기를 바랍니까?',
+    options: [
+      { text: '누구나 알아주는 위치', fuel: 'ego', intensity: 85 },
+      { text: '내가 만든 것이 단단히 쌓여 있는 자리', fuel: 'duty', intensity: 65 },
+      { text: '여전히 새로운 것에 빠져 있는 자리', fuel: 'joy', intensity: 65 },
+      { text: '지금과 크게 다르지 않아도 괜찮다', fuel: 'joy', intensity: 25 }
+    ]
+  },
+  {
+    section: '갈망과 회복',
+    text: '가장 깊은 회의가 찾아오는 순간은?',
+    options: [
+      { text: '모든 게 잘 돌아가는데도 의미가 안 느껴질 때', fuel: 'duty', intensity: 85 },
+      { text: '노력에 비해 인정이 따라오지 않을 때', fuel: 'ego', intensity: 65 },
+      { text: '더 이상 새로울 게 없다고 느낄 때', fuel: 'joy', intensity: 45 },
+      { text: '깊은 회의가 거의 안 찾아온다', fuel: 'ego', intensity: 25 }
+    ]
+  },
+  {
+    section: '갈망과 회복',
+    text: '당신이 자신에게 가장 듣고 싶은 말은?',
+    options: [
+      { text: '"역시 너 아니면 안 되겠어"', fuel: 'ego', intensity: 85 },
+      { text: '"네가 있어서 다행이다"', fuel: 'duty', intensity: 65 },
+      { text: '"이런 거 만들어서 좋다"', fuel: 'joy', intensity: 45 },
+      { text: '특별히 듣고 싶은 말이 없다', fuel: 'joy', intensity: 25 }
     ]
   }
 ];
@@ -1492,27 +1612,31 @@ function prevQuestion() {
 }
 
 // ============ 결과 계산 ============
+// 작업 A 결정사항 반영:
+// - 강도 분기점: 55 (avgIntensity < 55면 잔잔함)
+// - dominantFuel 동률 처리: 카운트 → intensity 평균 → joy/duty/ego 우선순위
+// - 매핑: silent_architect=duty, flowing_artisan=joy, peaceful_traveler=ego (잔잔함)
+//         guardian=duty, creator=joy, conqueror=ego (치열함)
 function calculateResult() {
   const fuels = { ego: 0, duty: 0, joy: 0 };
+  const fuelIntensities = { ego: [], duty: [], joy: [] };
   let intensitySum = 0;
 
   answers.forEach((ansIdx, qIdx) => {
     const opt = questions[qIdx].options[ansIdx];
     fuels[opt.fuel]++;
+    fuelIntensities[opt.fuel].push(opt.intensity);
     intensitySum += opt.intensity;
   });
 
   const avgIntensity = intensitySum / questions.length;
-
-  // 가장 높은 연료 결정
-  const dominantFuel = Object.keys(fuels).reduce((a, b) => fuels[a] > fuels[b] ? a : b);
-  const isIntense = avgIntensity >= 60;
+  const dominantFuel = determineDominantFuel(fuels, fuelIntensities);
 
   // 6유형 매핑
   let key;
-  if (avgIntensity < 50) {
+  if (avgIntensity < 55) {
     // 잔잔함 영역
-    if (dominantFuel === 'duty' && fuels.duty >= 5) key = 'silent_architect';
+    if (dominantFuel === 'duty') key = 'silent_architect';
     else if (dominantFuel === 'joy') key = 'flowing_artisan';
     else key = 'peaceful_traveler';
   } else {
@@ -1526,9 +1650,34 @@ function calculateResult() {
     key,
     archetype: archetypes[key],
     fuels,
+    fuelIntensities,
     intensity: avgIntensity,
     dominantFuel
   };
+}
+
+// dominantFuel 결정 — 3단계 동률 처리
+function determineDominantFuel(fuels, fuelIntensities) {
+  // 1차: 연료 카운트 최댓값
+  const maxCount = Math.max(fuels.ego, fuels.duty, fuels.joy);
+  const tied = Object.keys(fuels).filter(f => fuels[f] === maxCount);
+
+  if (tied.length === 1) return tied[0];
+
+  // 2차: 동률 시 intensity 평균이 가장 높은 연료
+  const avgs = {};
+  tied.forEach(f => {
+    const arr = fuelIntensities[f];
+    avgs[f] = arr.length > 0 ? arr.reduce((a, b) => a + b, 0) / arr.length : 0;
+  });
+  const maxAvg = Math.max(...Object.values(avgs));
+  const tied2 = Object.keys(avgs).filter(f => avgs[f] === maxAvg);
+
+  if (tied2.length === 1) return tied2[0];
+
+  // 3차: joy → duty → ego 우선순위
+  const priority = ['joy', 'duty', 'ego'];
+  return priority.find(f => tied2.includes(f));
 }
 
 // ============ 결과 렌더 ============
