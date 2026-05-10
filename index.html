@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Freedom · 어바웃 프리덤</title>
+<meta name="description" content="일상의 깨달음을 진단지와 콘텐츠로 풀어내는 공간">
+
+<meta property="og:title" content="About Freedom · 어바웃 프리덤">
+<meta property="og:description" content="일상의 깨달음을 진단지와 콘텐츠로 풀어내는 공간">
+<meta property="og:type" content="website">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Serif+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #FDFBF7;
+  --bg-deep: #F5F1E8;
+  --ink: #1A1916;
+  --ink-soft: #4A453E;
+  --ink-faint: #8B8478;
+  --line: #D4CDBE;
+  --highlight: #B8956A;
+  --serif: 'Gowun Batang', 'Noto Serif KR', serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-weight: 400;
+  line-height: 1.7;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(184, 149, 106, 0.04) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(107, 91, 69, 0.03) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(26, 25, 22, 0.008) 2px, rgba(26, 25, 22, 0.008) 4px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 60px 32px 120px;
+  position: relative;
+  z-index: 2;
+}
+
+/* === 헤더 === */
+.header {
+  text-align: center;
+  padding: 80px 0 96px;
+  animation: fadeUp 1.2s ease-out;
+}
+
+.brand-mark {
+  display: inline-block;
+  font-size: 11px;
+  letter-spacing: 0.4em;
+  color: var(--ink-faint);
+  margin-bottom: 48px;
+  position: relative;
+}
+
+.brand-mark::before, .brand-mark::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 32px;
+  height: 1px;
+  background: var(--line);
+}
+.brand-mark::before { right: calc(100% + 16px); }
+.brand-mark::after { left: calc(100% + 16px); }
+
+.brand-title {
+  font-size: clamp(40px, 7vw, 64px);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+}
+
+.brand-title-en {
+  display: block;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--highlight);
+  font-size: 0.7em;
+  margin-bottom: 8px;
+  letter-spacing: 0.02em;
+}
+
+.brand-tagline {
+  font-size: 15px;
+  color: var(--ink-faint);
+  letter-spacing: 0.2em;
+  margin-top: 32px;
+}
+
+/* === 소개 === */
+.intro {
+  margin-bottom: 96px;
+  animation: fadeUp 1.2s ease-out 0.2s both;
+}
+
+.intro-text {
+  font-size: 17px;
+  line-height: 2;
+  color: var(--ink-soft);
+  text-align: center;
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.intro-text p {
+  margin-bottom: 20px;
+}
+
+.intro-text p:last-child {
+  margin-bottom: 0;
+}
+
+/* === 진단 섹션 === */
+.section {
+  animation: fadeUp 1.2s ease-out 0.4s both;
+}
+
+.section-label {
+  text-align: center;
+  font-size: 11px;
+  letter-spacing: 0.4em;
+  color: var(--ink-faint);
+  margin-bottom: 48px;
+  position: relative;
+}
+
+.section-label::before, .section-label::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 32px;
+  height: 1px;
+  background: var(--line);
+}
+.section-label::before { right: calc(100% + 16px); }
+.section-label::after { left: calc(100% + 16px); }
+
+.diagnostic-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.diagnostic-card {
+  display: block;
+  padding: 40px 32px;
+  background: transparent;
+  border: 1px solid var(--line);
+  text-decoration: none;
+  color: var(--ink);
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.diagnostic-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 3px;
+  height: 100%;
+  background: var(--highlight);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.4s ease;
+}
+
+.diagnostic-card:hover {
+  background: var(--bg-deep);
+  border-color: var(--ink-soft);
+  transform: translateX(4px);
+}
+
+.diagnostic-card:hover::before {
+  transform: scaleY(1);
+}
+
+.card-en {
+  font-size: 13px;
+  letter-spacing: 0.15em;
+  color: var(--highlight);
+  font-style: italic;
+  margin-bottom: 8px;
+}
+
+.card-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  letter-spacing: -0.01em;
+}
+
+.card-desc {
+  font-size: 15px;
+  color: var(--ink-soft);
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+
+.card-meta {
+  display: flex;
+  gap: 24px;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  color: var(--ink-faint);
+}
+
+.card-meta span::before {
+  content: '·';
+  margin-right: 8px;
+  color: var(--highlight);
+}
+
+.card-arrow {
+  position: absolute;
+  right: 32px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  color: var(--ink-faint);
+  transition: all 0.3s ease;
+}
+
+.diagnostic-card:hover .card-arrow {
+  color: var(--highlight);
+  transform: translateY(-50%) translateX(8px);
+}
+
+/* === 예고 카드 === */
+.coming-soon {
+  display: block;
+  padding: 40px 32px;
+  background: transparent;
+  border: 1px dashed var(--line);
+  color: var(--ink-faint);
+  text-align: center;
+}
+
+.coming-soon-label {
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  color: var(--highlight);
+  margin-bottom: 12px;
+}
+
+.coming-soon-text {
+  font-style: italic;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+/* === 푸터 === */
+.footer {
+  margin-top: 120px;
+  padding-top: 48px;
+  border-top: 1px solid var(--line);
+  text-align: center;
+  font-size: 12px;
+  color: var(--ink-faint);
+  letter-spacing: 0.1em;
+  line-height: 2;
+}
+
+.footer-quote {
+  font-style: italic;
+  margin-bottom: 32px;
+  font-size: 14px;
+  color: var(--ink-soft);
+  letter-spacing: 0;
+}
+
+/* 애니메이션 */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 600px) {
+  .container { padding: 40px 20px 80px; }
+  .diagnostic-card { padding: 32px 24px; }
+  .card-arrow { right: 20px; }
+  .card-title { font-size: 20px; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- ============ 헤더 ============ -->
+  <header class="header">
+    <div class="brand-mark">SINCE 2026</div>
+
+    <h1 class="brand-title">
+      <span class="brand-title-en">About Freedom</span>
+      어바웃 프리덤
+    </h1>
+
+    <div class="brand-tagline">일상의 깨달음</div>
+  </header>
+
+  <!-- ============ 소개 ============ -->
+  <section class="intro">
+    <div class="intro-text">
+      <p>
+        삶의 결을 발견하는 진단과<br>
+        일상의 깨달음을 모으는 공간입니다.
+      </p>
+      <p>
+        야망, 자유, 즐거움, 사랑, 책임, 연결.<br>
+        그리고 잘 살아가는 법에 대하여.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ 진단 섹션 ============ -->
+  <section class="section">
+    <div class="section-label">DIAGNOSTICS</div>
+
+    <div class="diagnostic-list">
+
+      <!-- About My Ambition -->
+      <a href="diagnostics/ambition/" class="diagnostic-card">
+        <div class="card-en">About My Ambition</div>
+        <div class="card-title">나의 야망에 대하여</div>
+        <div class="card-desc">
+          야망은 큰 사람과 없는 사람으로 나뉘지 않습니다.
+          어떤 연료로 타오르고, 어떤 온도로 흐르는지가 다를 뿐입니다.
+        </div>
+        <div class="card-meta">
+          <span>12문항</span>
+          <span>약 8분</span>
+          <span>6가지 유형</span>
+        </div>
+        <div class="card-arrow">→</div>
+      </a>
+
+      <!-- 다음 진단지 예고 -->
+      <div class="coming-soon">
+        <div class="coming-soon-label">COMING SOON</div>
+        <div class="coming-soon-text">
+          About My Freedom · 나의 자유에 대하여<br>
+          About My Joy · 나의 즐거움에 대하여
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ 푸터 ============ -->
+  <footer class="footer">
+    <div class="footer-quote">
+      "일상의 깨달음이 쌓여,<br>
+      나만의 결을 발견하는 자리가 됩니다."
+    </div>
+    © 2026 About Freedom · 어바웃 프리덤
+  </footer>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>야망의 모양 진단 · 어바웃 프리덤</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Serif+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #FDFBF7;
+  --bg-deep: #F5F1E8;
+  --ink: #1A1916;
+  --ink-soft: #4A453E;
+  --ink-faint: #8B8478;
+  --line: #D4CDBE;
+  --accent: #6B5B45;
+  --highlight: #B8956A;
+  --serif: 'Gowun Batang', 'Noto Serif KR', serif;
+  --sans: 'Noto Serif KR', serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-weight: 400;
+  line-height: 1.7;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* 종이 질감 */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(184, 149, 106, 0.04) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(107, 91, 69, 0.03) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 2px,
+      rgba(26, 25, 22, 0.008) 2px,
+      rgba(26, 25, 22, 0.008) 4px
+    );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 60px 32px 120px;
+  position: relative;
+  z-index: 2;
+}
+
+/* === 인트로 === */
+.intro {
+  text-align: center;
+  padding: 80px 0 40px;
+  animation: fadeUp 1.2s ease-out;
+}
+
+.intro-mark {
+  display: inline-block;
+  font-size: 11px;
+  letter-spacing: 0.4em;
+  color: var(--ink-faint);
+  margin-bottom: 48px;
+  position: relative;
+}
+
+.intro-mark::before,
+.intro-mark::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 32px;
+  height: 1px;
+  background: var(--line);
+}
+.intro-mark::before { right: calc(100% + 16px); }
+.intro-mark::after { left: calc(100% + 16px); }
+
+.intro-title {
+  font-size: clamp(36px, 6vw, 56px);
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  margin-bottom: 32px;
+  color: var(--ink);
+}
+
+.intro-title .accent {
+  color: var(--highlight);
+  font-style: italic;
+  font-weight: 400;
+}
+
+.intro-subtitle {
+  font-size: 16px;
+  color: var(--ink-soft);
+  max-width: 520px;
+  margin: 0 auto 64px;
+  line-height: 1.9;
+}
+
+.intro-meta {
+  display: flex;
+  justify-content: center;
+  gap: 48px;
+  margin-bottom: 64px;
+  font-size: 13px;
+  color: var(--ink-faint);
+  letter-spacing: 0.05em;
+}
+
+.intro-meta span::before {
+  content: '·';
+  margin-right: 8px;
+  color: var(--highlight);
+}
+
+.start-btn {
+  background: var(--ink);
+  color: var(--bg);
+  border: none;
+  padding: 20px 48px;
+  font-family: var(--serif);
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.start-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--highlight);
+  transform: translateY(100%);
+  transition: transform 0.4s ease;
+  z-index: 0;
+}
+
+.start-btn:hover::before { transform: translateY(0); }
+.start-btn span { position: relative; z-index: 1; }
+
+.intro-quote {
+  margin-top: 96px;
+  padding: 32px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  font-style: italic;
+  color: var(--ink-soft);
+  font-size: 15px;
+  line-height: 2;
+}
+
+.intro-quote-author {
+  display: block;
+  margin-top: 16px;
+  font-style: normal;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  color: var(--ink-faint);
+}
+
+/* === 진단 === */
+.quiz {
+  display: none;
+  animation: fadeUp 0.8s ease-out;
+}
+
+.quiz.active { display: block; }
+
+.progress-bar {
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  padding: 24px 0;
+  z-index: 10;
+  margin-bottom: 48px;
+  border-bottom: 1px solid var(--line);
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 12px;
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  color: var(--ink-faint);
+}
+
+.progress-current {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--ink);
+  font-family: var(--serif);
+}
+
+.progress-track {
+  height: 1px;
+  background: var(--line);
+  position: relative;
+}
+
+.progress-fill {
+  position: absolute;
+  height: 1px;
+  background: var(--ink);
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.question-block {
+  display: none;
+  animation: fadeIn 0.6s ease-out;
+}
+
+.question-block.active { display: block; }
+
+.q-section {
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  color: var(--highlight);
+  margin-bottom: 24px;
+  text-transform: uppercase;
+}
+
+.q-text {
+  font-size: clamp(22px, 3.5vw, 28px);
+  font-weight: 700;
+  line-height: 1.5;
+  color: var(--ink);
+  margin-bottom: 48px;
+  letter-spacing: -0.01em;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.option {
+  background: transparent;
+  border: 1px solid var(--line);
+  padding: 24px 28px;
+  text-align: left;
+  font-family: var(--serif);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  width: 100%;
+}
+
+.option::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 3px;
+  height: 100%;
+  background: var(--highlight);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.3s ease;
+}
+
+.option:hover {
+  background: var(--bg-deep);
+  color: var(--ink);
+  border-color: var(--ink-soft);
+  transform: translateX(4px);
+}
+
+.option:hover::before { transform: scaleY(1); }
+
+.option.selected {
+  background: var(--ink);
+  color: var(--bg);
+  border-color: var(--ink);
+}
+
+.option.selected::before { transform: scaleY(1); background: var(--bg); }
+
+.nav-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 64px;
+  padding-top: 32px;
+  border-top: 1px solid var(--line);
+}
+
+.nav-btn {
+  background: transparent;
+  border: none;
+  font-family: var(--serif);
+  font-size: 14px;
+  letter-spacing: 0.1em;
+  color: var(--ink-soft);
+  cursor: pointer;
+  padding: 12px 0;
+  transition: color 0.3s ease;
+}
+
+.nav-btn:hover { color: var(--ink); }
+.nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+
+.nav-btn.next {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+/* === 결과지 === */
+.result {
+  display: none;
+  animation: fadeUp 1.2s ease-out;
+}
+
+.result.active { display: block; }
+
+.result-header {
+  text-align: center;
+  margin-bottom: 64px;
+  padding: 48px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.result-label {
+  font-size: 11px;
+  letter-spacing: 0.4em;
+  color: var(--ink-faint);
+  margin-bottom: 24px;
+}
+
+.result-emoji {
+  font-size: 48px;
+  margin-bottom: 24px;
+  display: block;
+}
+
+.result-title {
+  font-size: clamp(32px, 5vw, 44px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+  line-height: 1.3;
+}
+
+.result-tagline {
+  font-style: italic;
+  color: var(--highlight);
+  font-size: 18px;
+}
+
+/* 두 축 시각화 */
+.axis-viz {
+  margin: 64px 0;
+  padding: 48px 0;
+}
+
+.axis-viz-label {
+  text-align: center;
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  color: var(--ink-faint);
+  margin-bottom: 32px;
+}
+
+.axis-grid {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  height: 320px;
+  margin: 0 auto;
+  border: 1px solid var(--line);
+  background:
+    linear-gradient(to right, transparent 49.8%, var(--line) 49.8%, var(--line) 50.2%, transparent 50.2%),
+    linear-gradient(to bottom, transparent 49.8%, var(--line) 49.8%, var(--line) 50.2%, transparent 50.2%);
+}
+
+.axis-label {
+  position: absolute;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: var(--ink-faint);
+}
+
+.axis-label.top { top: -28px; left: 50%; transform: translateX(-50%); }
+.axis-label.bottom { bottom: -28px; left: 50%; transform: translateX(-50%); }
+.axis-label.left { left: -8px; top: 50%; transform: translateX(-100%) translateY(-50%); }
+.axis-label.right { right: -8px; top: 50%; transform: translateX(100%) translateY(-50%); }
+
+.axis-dot {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background: var(--highlight);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 0 6px rgba(184, 149, 106, 0.2);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 6px rgba(184, 149, 106, 0.2); }
+  50% { box-shadow: 0 0 0 12px rgba(184, 149, 106, 0.1); }
+}
+
+/* 결과지 본문 */
+.result-section {
+  margin-bottom: 56px;
+}
+
+.result-section-mark {
+  display: inline-block;
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  color: var(--highlight);
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--highlight);
+}
+
+.result-section-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  letter-spacing: -0.01em;
+}
+
+.result-section-body {
+  font-size: 16px;
+  line-height: 1.9;
+  color: var(--ink-soft);
+}
+
+.result-section-body p { margin-bottom: 16px; }
+
+.shadow-box {
+  background: var(--bg-deep);
+  padding: 32px;
+  border-left: 3px solid var(--highlight);
+  margin-top: 16px;
+}
+
+.next-step {
+  background: var(--ink);
+  color: var(--bg);
+  padding: 48px 32px;
+  margin-top: 32px;
+  position: relative;
+}
+
+.next-step .result-section-mark {
+  color: var(--bg-deep);
+  border-color: var(--bg-deep);
+}
+
+.next-step .result-section-body {
+  color: var(--bg-deep);
+}
+
+.book-rec {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  padding: 32px;
+  background: var(--bg-deep);
+  margin-top: 16px;
+}
+
+.book-icon {
+  font-size: 32px;
+  flex-shrink: 0;
+}
+
+.book-content { flex: 1; }
+.book-title { font-weight: 700; margin-bottom: 4px; font-size: 17px; }
+.book-author { font-size: 13px; color: var(--ink-faint); margin-bottom: 12px; letter-spacing: 0.05em; }
+.book-reason { font-size: 14px; line-height: 1.8; color: var(--ink-soft); }
+
+/* 클로징 */
+.closing {
+  text-align: center;
+  margin-top: 96px;
+  padding-top: 48px;
+  border-top: 1px solid var(--line);
+}
+
+.closing-text {
+  font-style: italic;
+  color: var(--ink-soft);
+  font-size: 17px;
+  line-height: 2;
+  max-width: 500px;
+  margin: 0 auto 48px;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.action-btn {
+  background: transparent;
+  border: 1px solid var(--ink);
+  color: var(--ink);
+  padding: 16px 32px;
+  font-family: var(--serif);
+  font-size: 14px;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.action-btn:hover {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+.action-btn.primary {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+.action-btn.primary:hover {
+  background: var(--highlight);
+  border-color: var(--highlight);
+}
+
+/* 애니메이션 */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (max-width: 600px) {
+  .container { padding: 40px 20px 80px; }
+  .intro-meta { flex-direction: column; gap: 12px; }
+  .intro-meta span::before { display: none; }
+  .option { padding: 20px; font-size: 15px; }
+  .axis-grid { height: 280px; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- ============ 인트로 ============ -->
+  <section class="intro" id="intro">
+    <div class="intro-mark">ABOUT FREEDOM · 일상의 깨달음</div>
+
+    <h1 class="intro-title">
+      당신의 야망은<br>
+      어떤 <span class="accent">모양</span>인가요
+    </h1>
+
+    <p class="intro-subtitle">
+      야망은 큰 사람과 없는 사람으로 나뉘지 않습니다.<br>
+      어떤 연료로 타오르고, 어떤 온도로 흐르는지가 다를 뿐입니다.<br>
+      이 진단은 당신 안에 이미 있는 야망의 결을 발견합니다.
+    </p>
+
+    <div class="intro-meta">
+      <span>12문항</span>
+      <span>약 8분</span>
+      <span>6가지 유형</span>
+    </div>
+
+    <button class="start-btn" onclick="startQuiz()">
+      <span>시작하기</span>
+    </button>
+
+    <div class="intro-quote">
+      "야망이 적은 줄 알았지만,<br>
+      사실 가장 조용하게 가장 깊이 흐르고 있었다."
+      <span class="intro-quote-author">— FROM A QUIET AMBITION</span>
+    </div>
+  </section>
+
+  <!-- ============ 진단 ============ -->
+  <section class="quiz" id="quiz">
+    <div class="progress-bar">
+      <div class="progress-info">
+        <span><span class="progress-current" id="progressNum">01</span><span style="opacity:0.4"> / 12</span></span>
+        <span id="sectionLabel">현재의 나</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill" style="width: 8.33%"></div>
+      </div>
+    </div>
+
+    <div id="questionContainer"></div>
+
+    <div class="nav-buttons">
+      <button class="nav-btn" id="prevBtn" onclick="prevQuestion()">← 이전</button>
+      <button class="nav-btn next" id="nextBtn" onclick="nextQuestion()" disabled>다음 →</button>
+    </div>
+  </section>
+
+  <!-- ============ 결과 ============ -->
+  <section class="result" id="result"></section>
+
+</div>
+
+<script>
+// ============ 데이터 ============
+// 두 축: fuel (ego/duty/joy 누적), intensity (0-100, 높을수록 치열함)
+// 각 선택지는 fuel 카테고리에 1점, intensity 점수 부여
+
+const questions = [
+  // === SECTION 1: 현재의 나 (Q1-4) ===
+  {
+    section: '현재의 나',
+    text: '"이 정도면 일이 다 끝났다"는 감각은 언제 찾아오나요?',
+    options: [
+      { text: '남들이 요구한 마감과 기준을 무사히 통과했을 때', fuel: 'duty', intensity: 30 },
+      { text: '내 눈에 보이는 작은 거슬림까지 다 손봐서 내 기준을 만족시켰을 때', fuel: 'joy', intensity: 85 },
+      { text: '예상보다 좋은 평가나 인정을 받았을 때', fuel: 'ego', intensity: 70 },
+      { text: '딱히 명확한 끝을 느끼지 못한다. 그저 다음 일로 넘어간다', fuel: 'duty', intensity: 50 }
+    ]
+  },
+  {
+    section: '현재의 나',
+    text: '큰 성과를 냈을 때 가장 먼저 드는 생각은?',
+    options: [
+      { text: '드디어 해냈어. 이제 좀 쉬어도 되겠다', fuel: 'duty', intensity: 40 },
+      { text: '다행이다. 다음엔 어떻게 더 매끄럽게 할 수 있을까', fuel: 'joy', intensity: 90 },
+      { text: '봤지? 내가 해낼 거라고 했잖아', fuel: 'ego', intensity: 80 },
+      { text: '특별한 감흥이 없다. 그냥 다음 할 일을 본다', fuel: 'duty', intensity: 60 }
+    ]
+  },
+  {
+    section: '현재의 나',
+    text: '주말이나 휴식 시간에 일에 대한 생각이 떠오를 때 당신은',
+    options: [
+      { text: '의식적으로 차단한다. 쉴 때는 쉬는 게 맞다', fuel: 'joy', intensity: 35 },
+      { text: '대수롭지 않게 메모해두고 평일에 처리한다', fuel: 'duty', intensity: 55 },
+      { text: '아예 노트북을 열고 그 자리에서 마무리해버린다', fuel: 'duty', intensity: 90 },
+      { text: '머릿속으로 자연스럽게 그 문제를 이리저리 굴려본다', fuel: 'joy', intensity: 75 }
+    ]
+  },
+  {
+    section: '현재의 나',
+    text: '주변에서 "왜 그렇게까지 해?"라는 말을 들을 때 당신은',
+    options: [
+      { text: '들어본 적이 거의 없다', fuel: 'duty', intensity: 25 },
+      { text: '듣긴 했지만 나는 그게 당연한 수준이라고 느낀다', fuel: 'duty', intensity: 85 },
+      { text: '그러게, 너무 무리했나 싶다가도 결국 또 그렇게 한다', fuel: 'duty', intensity: 80 },
+      { text: '나도 모른다. 그냥 거기까지 가야 직성이 풀린다', fuel: 'joy', intensity: 90 }
+    ]
+  },
+
+  // === SECTION 2: 나를 움직이는 것 (Q5-8) ===
+  {
+    section: '나를 움직이는 것',
+    text: '늦은 밤까지 잠을 줄여가며 무언가에 몰두하게 만드는 가장 강력한 힘은?',
+    options: [
+      { text: '맡은 일에 차질이 생기거나 누군가에게 폐를 끼치고 싶지 않은 마음', fuel: 'duty', intensity: 80 },
+      { text: '뒤처지기 싫고, 나를 증명해 보이고 싶은 마음', fuel: 'ego', intensity: 80 },
+      { text: '이 문제가 어떻게 풀리는지 끝까지 보고 싶은 호기심', fuel: 'joy', intensity: 80 },
+      { text: '딱히 그렇게까지 몰두하는 일은 잘 없다', fuel: 'duty', intensity: 30 }
+    ]
+  },
+  {
+    section: '나를 움직이는 것',
+    text: '아무도 보지 않는 일에 들이는 정성의 양은?',
+    options: [
+      { text: '보는 사람이 있을 때와 거의 같다. 내 기준이 따로 있다', fuel: 'joy', intensity: 90 },
+      { text: '솔직히 줄어든다. 효율을 따지는 편이다', fuel: 'ego', intensity: 50 },
+      { text: '오히려 더 신경 쓴다. 나중에 누가 봐도 부끄럽지 않아야 한다', fuel: 'duty', intensity: 85 },
+      { text: '필요한 만큼만 한다. 과한 것도 부족한 것도 싫다', fuel: 'duty', intensity: 45 }
+    ]
+  },
+  {
+    section: '나를 움직이는 것',
+    text: '당신이 어떤 일을 시작할 때 가장 먼저 떠올리는 것은?',
+    options: [
+      { text: '이 일이 누구에게 도움이 되고 누구에게 닿을지', fuel: 'duty', intensity: 70 },
+      { text: '이 일을 통해 내가 어디까지 갈 수 있을지', fuel: 'ego', intensity: 75 },
+      { text: '이 일이 얼마나 재미있을지, 무엇을 배울 수 있을지', fuel: 'joy', intensity: 75 },
+      { text: '얼마나 걸리고 어떻게 끝낼지의 동선', fuel: 'duty', intensity: 55 }
+    ]
+  },
+  {
+    section: '나를 움직이는 것',
+    text: '당신의 성취 뒤에 더 큰 비중을 차지한 것은?',
+    options: [
+      { text: '간절히 원해서 끌어당긴 것에 가깝다', fuel: 'ego', intensity: 75 },
+      { text: '눈앞의 일에 몰입하다 자연스럽게 따라온 것에 가깝다', fuel: 'joy', intensity: 80 },
+      { text: '책임감으로 버티다 보니 어느새 도착해 있었다', fuel: 'duty', intensity: 80 },
+      { text: '운이나 타이밍이 컸다고 느낀다', fuel: 'duty', intensity: 40 }
+    ]
+  },
+
+  // === SECTION 3: 갈망과 회복 (Q9-12) ===
+  {
+    section: '갈망과 회복',
+    text: '실패했을 때 당신의 가장 솔직한 반응은?',
+    options: [
+      { text: '오기가 생겨서라도 다른 길을 찾는다', fuel: 'ego', intensity: 90 },
+      { text: '잠시 무너지지만, 결국 그 경험을 정리해 다음에 활용한다', fuel: 'joy', intensity: 80 },
+      { text: '내 책임을 곱씹으며 같은 실수를 반복하지 않으려 한다', fuel: 'duty', intensity: 75 },
+      { text: '이 길은 내 길이 아닐 수도 있다고 받아들인다', fuel: 'joy', intensity: 35 }
+    ]
+  },
+  {
+    section: '갈망과 회복',
+    text: '문득 모든 걸 내려놓고 강물 소리만 듣는 단순한 삶을 꿈꿀 때 그 이유는?',
+    options: [
+      { text: '지금 짊어진 것들이 너무 무겁고 도망치고 싶어서', fuel: 'duty', intensity: 70 },
+      { text: '소음을 끄고 가장 본질적인 것에만 깊이 몰입하고 싶어서', fuel: 'joy', intensity: 70 },
+      { text: '딱히 그런 갈망은 없다. 나는 지금이 좋다', fuel: 'duty', intensity: 25 },
+      { text: '인정과 평가에서 자유로워지고 싶어서', fuel: 'ego', intensity: 40 }
+    ]
+  },
+  {
+    section: '갈망과 회복',
+    text: '당신이 진짜 원하는 영향력의 모양은?',
+    options: [
+      { text: '내 한 몸과 가까운 사람이 평온하면 충분하다', fuel: 'duty', intensity: 30 },
+      { text: '내 분야에서 또렷한 흔적을 남기고 인정받고 싶다', fuel: 'ego', intensity: 85 },
+      { text: '나의 깨달음이 누군가의 삶에 작은 변화로 닿았으면 좋겠다', fuel: 'joy', intensity: 75 },
+      { text: '내가 만든 것이 오래오래 누군가에게 쓸모 있기를 바란다', fuel: 'duty', intensity: 70 }
+    ]
+  },
+  {
+    section: '갈망과 회복',
+    text: '다음 중 당신이 가장 부러워하는 사람은?',
+    options: [
+      { text: '치열하게 정상에 오른 사람', fuel: 'ego', intensity: 85 },
+      { text: '복잡한 것을 단순하게 만들어내는 장인', fuel: 'joy', intensity: 80 },
+      { text: '주변 모두에게 든든한 사람으로 기억되는 사람', fuel: 'duty', intensity: 75 },
+      { text: '아무것도 증명하지 않고 평온하게 사는 사람', fuel: 'joy', intensity: 30 }
+    ]
+  }
+];
+
+// ============ 6가지 결과 유형 ============
+const archetypes = {
+  // 잔잔함(intensity < 55) × 균형/낮은 점수
+  peaceful_traveler: {
+    emoji: '🌱',
+    title: '평온한 여행자',
+    tagline: '내려놓을 줄 아는 사람의 가벼움',
+    shape: '당신의 야망은 낮은 온도로 흐르는 평온한 강물입니다. 더 멀리 가는 것보다 지금의 흐름을 유지하는 데서 충만함을 느낍니다. 큰 야망 없이도 일상을 살아갈 줄 안다는 것은, 사실 많은 사람이 갖지 못한 귀한 능력입니다.',
+    strength: '주변의 소음과 비교에 흔들리지 않는 단단함이 있습니다. 만족할 줄 아는 능력은 가장 빠르게 사라지는 현대의 미덕이고, 당신은 그것을 자연스럽게 갖추고 있습니다.',
+    shadow: '다만 가끔, "내가 이대로 멈춰 있는 건 아닐까" 하는 막연한 불안이 찾아올 수 있습니다. 그 불안의 정체는 야망의 부족이 아니라, 사회가 끊임없이 보내는 "더 가야 한다"는 신호일 수 있습니다. 당신의 평온은 게으름이 아닙니다.',
+    next: '오히려 당신에게 필요한 것은 "내가 진짜 원하는 작은 호기심 하나"를 발견하는 일입니다. 거창한 목표가 아니라, 일주일에 한 번이라도 마음이 살짝 두근거리는 일을 시도해보세요.',
+    book: { title: '조화로운 삶', author: '헬렌 니어링·스코트 니어링', reason: '바깥의 기준에 휘둘리지 않고 내 속도로 사는 삶의 가능성을 보여줍니다.' }
+  },
+  guardian: {
+    emoji: '🛡️',
+    title: '헌신하는 수호자',
+    tagline: '책임의 무게로 탁월함을 빚어내는 사람',
+    shape: '당신은 야망이 없다고 스스로 믿어왔지만, 그것은 오해였습니다. 당신의 야망은 "남에게 폐를 끼치고 싶지 않다"는 책임감을 연료로 삼아, 누구도 흉내 낼 수 없는 완성도를 만들어냅니다. 이것은 가장 우아하고도 가장 무거운 형태의 야망입니다.',
+    strength: '당신의 손을 거친 일은 다른 차원의 신뢰를 갖습니다. 사람들은 당신이 야망 때문에 그 자리에 있다고 생각하지 않지만, 결국 당신을 가장 중요한 자리로 추대합니다. 책임감은 가장 정직한 야망의 얼굴입니다.',
+    shadow: '하지만 책임감을 연료로 쓰는 야망에는 그늘이 있습니다. 에너지가 늘 새어 나가고, "내가 정말 원하는 것"을 들여다볼 시간이 사라집니다. 번아웃은 멀리 있지 않고, 어느 날 갑자기 모든 것이 무의미해 보이는 순간으로 찾아옵니다.',
+    next: '책임감이라는 갑옷을 한 번에 벗을 필요는 없습니다. 다만 일주일에 한 번, "이건 누구를 위해서가 아니라 내가 즐겁고 싶어서 하는 일"이라고 또렷이 이름 붙일 수 있는 시간을 만드세요. 그 시간이 당신의 야망에 새 연료를 채워줄 것입니다.',
+    book: { title: '미움받을 용기', author: '기시미 이치로·고가 후미타케', reason: '"나의 과제"와 "타인의 과제"를 분리하는 법을 배우면, 책임감의 갑옷이 가벼워집니다.' }
+  },
+  conqueror: {
+    emoji: '🔥',
+    title: '정복하는 전사',
+    tagline: '뜨겁게 타오르며 정상을 향해 가는 사람',
+    shape: '당신은 야망을 부정하지 않습니다. 더 높은 곳, 더 또렷한 인정, 더 큰 영향력을 원한다고 솔직하게 말할 수 있는 사람입니다. 이 직진성은 대부분의 사람이 갖지 못한 추진력이고, 당신을 빠르게 멀리 데려갑니다.',
+    strength: '당신은 흐릿한 목표 앞에서도 가장 빨리 길을 만듭니다. 경쟁과 비교를 두려워하지 않는 사람만이 도달할 수 있는 자리가 분명히 존재하고, 당신은 그것을 본능적으로 알고 있습니다.',
+    shadow: '하지만 에고를 연료로 쓰는 야망은 빠르게 닳습니다. 정상에 올랐을 때 "다음은 무엇이지?"라는 공허, 인정이 끊겼을 때 찾아오는 무력감, 그리고 사람과의 관계에서 생기는 미세한 균열이 그 그늘입니다.',
+    next: '"내가 이긴다"가 아니라 "내가 만든다"로 동사를 바꿔보세요. 정복할 대상이 아니라 창조할 대상으로 시선을 옮길 때, 당신의 추진력은 훨씬 더 멀리 갈 수 있습니다.',
+    book: { title: '몰입의 즐거움', author: '미하이 칙센트미하이', reason: '경쟁이 아닌 몰입에서 오는 더 깊은 성취의 감각을 배울 수 있습니다.' }
+  },
+  creator: {
+    emoji: '✨',
+    title: '유희하는 창조자',
+    tagline: '즐거움을 연료로 탁월함을 짓는 사람',
+    shape: '당신은 야망의 가장 세련된 형태에 도달해 있습니다. 누구를 이기기 위해서도, 누구에게 폐를 끼치지 않기 위해서도 아니라, 그저 그 일이 흥미롭고 재미있어서 끝까지 갑니다. 그리고 그 끝은 늘 사람들이 놀랄 만큼 높은 곳에 있습니다.',
+    strength: '당신의 작업에는 억지가 없습니다. 책임감이나 인정 욕구로 만든 것은 어딘가 무거운 흔적이 남지만, 즐거움으로 만든 것은 가벼우면서도 깊습니다. 이런 결과물이 결국 사람의 마음을 움직입니다.',
+    shadow: '다만 즐거움이라는 연료는 변덕스럽습니다. 흥미가 식으면 동력도 함께 사라지고, 그 빈 자리에 "내가 무책임한 건가" 하는 자기 의심이 들어옵니다. 또 즐거움이 너무 자기 안쪽에만 머무르면, 세상과 연결되지 못한 채 고립되기도 합니다.',
+    next: '당신에게 필요한 것은 "즐거움을 잃지 않으면서도 마무리하는 구조"입니다. 작은 단위의 약속, 함께 작업하는 사람, 외부 마감 같은 가벼운 뼈대를 만들어두면 변덕에 흔들리지 않고 끝까지 갑니다.',
+    book: { title: '지와 사랑(나르치스와 골드문트)', author: '헤르만 헤세', reason: '규율과 자유, 책임과 즐거움이 어떻게 한 사람 안에서 화해하는지 보여주는 가장 아름다운 이야기입니다.' }
+  },
+  flowing_artisan: {
+    emoji: '🌊',
+    title: '흐르는 장인',
+    tagline: '강물 소리를 듣는 바주데바의 마음',
+    shape: '당신의 야망은 시끄럽지 않습니다. 더 높이 오르려 하지 않지만, 손에 잡힌 일을 끝까지 정성껏 다듬는 사람입니다. 이것은 헤세의 바주데바처럼, 가장 단순한 자리에서 가장 깊은 통달에 이르는 형태의 야망입니다.',
+    strength: '당신은 외부의 평가에 흔들리지 않고 본질에 집중하는 능력이 있습니다. 빠른 변화의 시대에 가장 희귀해진 자질이고, 당신의 결과물에는 그래서 시간이 지나도 닳지 않는 단단함이 있습니다.',
+    shadow: '다만 세상이 당신의 깊이를 알아보기까지 시간이 걸립니다. 그 사이 "내가 너무 작은 자리에 머물러 있는 건가" 하는 의심이 찾아올 수 있습니다. 또 너무 자기 안에만 머물면, 당신의 통찰이 닿을 수 있었던 사람들에게 닿지 못하기도 합니다.',
+    next: '당신의 통찰을 작은 형태로라도 외부에 내어보세요. 글 한 편, 짧은 영상, 가까운 사람과의 대화 같은 것들입니다. 큰 무대를 만들 필요 없이, 강물처럼 자연스럽게 흘려보내면 됩니다.',
+    book: { title: '월든', author: '헨리 데이비드 소로', reason: '단순한 삶이 어떻게 가장 풍요로운 통찰의 토양이 되는지 알려줍니다.' }
+  },
+  silent_architect: {
+    emoji: '🏛️',
+    title: '조용한 건축가',
+    tagline: '말없이 단단한 것을 쌓아 올리는 사람',
+    shape: '당신은 화려하게 드러나지 않지만, 누군가가 의지할 수 있는 것을 묵묵히 만드는 사람입니다. 책임감이 동력이지만 그 무게에 짓눌리지 않고, 자기만의 페이스로 꾸준히 쌓아 올립니다. 이것은 가장 오래가는 형태의 야망입니다.',
+    strength: '당신의 작업은 시끄럽지 않은 대신 사라지지 않습니다. 사람들은 당신이 만든 것에 자연스럽게 의지하게 되고, 그 신뢰는 다른 어떤 성취보다 깊이 남습니다.',
+    shadow: '하지만 조용히 쌓는 사람은 스스로의 성취를 자주 놓칩니다. "이 정도는 누구나 한다"고 여기다가, 정작 자신의 가치를 자기가 가장 모르는 상태가 되기도 합니다. 또 책임감이 늘 균형 잡힌 형태인 만큼, 작은 도약이 필요한 순간에 머뭇거리기도 합니다.',
+    next: '한 번쯤은 자신이 만든 것을 객관적으로 정리해보세요. 자랑이 아니라 기록입니다. 그리고 당신이 묵묵히 쌓은 것 중 하나를 골라, "이번엔 조금 더 멀리 보내볼까" 하고 작은 도약을 시도해보세요.',
+    book: { title: '나는 풍요로웠고, 지구는 달라졌다', author: '호프 자런', reason: '조용히 자기 자리를 지키며 쌓아 올리는 일의 단단한 가치를 보여주는 책입니다.' }
+  }
+};
+
+// ============ 상태 ============
+let currentQ = 0;
+let answers = new Array(questions.length).fill(null);
+
+// ============ 진단 시작 ============
+function startQuiz() {
+  document.getElementById('intro').style.display = 'none';
+  document.getElementById('quiz').classList.add('active');
+  renderQuestion();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ============ 문항 렌더 ============
+function renderQuestion() {
+  const q = questions[currentQ];
+  const container = document.getElementById('questionContainer');
+
+  container.innerHTML = `
+    <div class="question-block active">
+      <div class="q-section">SECTION · ${q.section}</div>
+      <div class="q-text">${q.text}</div>
+      <div class="options">
+        ${q.options.map((opt, i) => `
+          <button class="option ${answers[currentQ] === i ? 'selected' : ''}"
+                  onclick="selectOption(${i})">
+            ${opt.text}
+          </button>
+        `).join('')}
+      </div>
+    </div>
+  `;
+
+  document.getElementById('progressNum').textContent = String(currentQ + 1).padStart(2, '0');
+  document.getElementById('sectionLabel').textContent = q.section;
+  document.getElementById('progressFill').style.width = `${((currentQ + 1) / questions.length) * 100}%`;
+  document.getElementById('prevBtn').disabled = currentQ === 0;
+  document.getElementById('nextBtn').disabled = answers[currentQ] === null;
+  document.getElementById('nextBtn').textContent = currentQ === questions.length - 1 ? '결과 보기 →' : '다음 →';
+}
+
+function selectOption(idx) {
+  answers[currentQ] = idx;
+  renderQuestion();
+}
+
+function nextQuestion() {
+  if (answers[currentQ] === null) return;
+  if (currentQ === questions.length - 1) {
+    showResult();
+  } else {
+    currentQ++;
+    renderQuestion();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
+
+function prevQuestion() {
+  if (currentQ === 0) return;
+  currentQ--;
+  renderQuestion();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ============ 결과 계산 ============
+function calculateResult() {
+  const fuels = { ego: 0, duty: 0, joy: 0 };
+  let intensitySum = 0;
+
+  answers.forEach((ansIdx, qIdx) => {
+    const opt = questions[qIdx].options[ansIdx];
+    fuels[opt.fuel]++;
+    intensitySum += opt.intensity;
+  });
+
+  const avgIntensity = intensitySum / questions.length;
+
+  // 가장 높은 연료 결정
+  const dominantFuel = Object.keys(fuels).reduce((a, b) => fuels[a] > fuels[b] ? a : b);
+  const isIntense = avgIntensity >= 60;
+
+  // 6유형 매핑
+  let key;
+  if (avgIntensity < 50) {
+    // 잔잔함 영역
+    if (dominantFuel === 'duty' && fuels.duty >= 5) key = 'silent_architect';
+    else if (dominantFuel === 'joy') key = 'flowing_artisan';
+    else key = 'peaceful_traveler';
+  } else {
+    // 치열함 영역
+    if (dominantFuel === 'ego') key = 'conqueror';
+    else if (dominantFuel === 'duty') key = 'guardian';
+    else key = 'creator';
+  }
+
+  return {
+    key,
+    archetype: archetypes[key],
+    fuels,
+    intensity: avgIntensity,
+    dominantFuel
+  };
+}
+
+// ============ 결과 렌더 ============
+function showResult() {
+  document.getElementById('quiz').classList.remove('active');
+  const resultEl = document.getElementById('result');
+  resultEl.classList.add('active');
+
+  const r = calculateResult();
+  const a = r.archetype;
+
+  // 좌표 계산: x축은 연료(ego=좌, joy=우), y축은 강도(아래=잔잔, 위=치열)
+  const fuelScore = (r.fuels.joy - r.fuels.ego) / questions.length;
+  const xPercent = 50 + fuelScore * 80; // -1~1 → 10~90%
+  const yPercent = 100 - r.intensity; // 강도 높을수록 위로
+
+  resultEl.innerHTML = `
+    <div class="result-header">
+      <div class="result-label">YOUR AMBITION SHAPE</div>
+      <span class="result-emoji">${a.emoji}</span>
+      <h2 class="result-title">${a.title}</h2>
+      <p class="result-tagline">${a.tagline}</p>
+    </div>
+
+    <div class="axis-viz">
+      <div class="axis-viz-label">당신의 야망 좌표</div>
+      <div class="axis-grid">
+        <span class="axis-label top">치열함</span>
+        <span class="axis-label bottom">잔잔함</span>
+        <span class="axis-label left">에고·책임</span>
+        <span class="axis-label right">즐거움</span>
+        <div class="axis-dot" style="left: ${xPercent}%; top: ${yPercent}%"></div>
+      </div>
+    </div>
+
+    <div class="result-section">
+      <div class="result-section-mark">01 · 당신의 모양</div>
+      <h3 class="result-section-title">이 야망은 어떻게 생겼나</h3>
+      <div class="result-section-body"><p>${a.shape}</p></div>
+    </div>
+
+    <div class="result-section">
+      <div class="result-section-mark">02 · 강점</div>
+      <h3 class="result-section-title">이 모양이 가진 힘</h3>
+      <div class="result-section-body"><p>${a.strength}</p></div>
+    </div>
+
+    <div class="result-section">
+      <div class="result-section-mark">03 · 그늘</div>
+      <h3 class="result-section-title">조심해야 할 것</h3>
+      <div class="result-section-body">
+        <div class="shadow-box"><p>${a.shadow}</p></div>
+      </div>
+    </div>
+
+    <div class="result-section">
+      <div class="next-step">
+        <div class="result-section-mark">04 · 다음 한 걸음</div>
+        <h3 class="result-section-title" style="color: var(--bg)">지금 해볼 수 있는 것</h3>
+        <div class="result-section-body"><p>${a.next}</p></div>
+      </div>
+    </div>
+
+    <div class="result-section">
+      <div class="result-section-mark">05 · 함께 읽으면 좋은 책</div>
+      <h3 class="result-section-title">당신을 위한 한 권</h3>
+      <div class="book-rec">
+        <div class="book-icon">📖</div>
+        <div class="book-content">
+          <div class="book-title">${a.book.title}</div>
+          <div class="book-author">${a.book.author}</div>
+          <div class="book-reason">${a.book.reason}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="closing">
+      <p class="closing-text">
+        야망은 큰 사람과 없는 사람으로 나뉘지 않습니다.<br>
+        어떤 결로 흐르는지가 다를 뿐입니다.<br>
+        당신의 결을 알아본 오늘이, 다음 한 걸음의 시작입니다.
+      </p>
+      <div class="action-buttons">
+        <button class="action-btn" onclick="restart()">다시 진단하기</button>
+        <button class="action-btn primary" onclick="shareResult()">결과 공유하기</button>
+      </div>
+    </div>
+  `;
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function restart() {
+  currentQ = 0;
+  answers = new Array(questions.length).fill(null);
+  document.getElementById('result').classList.remove('active');
+  document.getElementById('intro').style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function shareResult() {
+  const r = calculateResult();
+  const text = `나의 야망은 "${r.archetype.title}" — ${r.archetype.tagline}\n\n어바웃 프리덤 · 일상의 깨달음`;
+  if (navigator.share) {
+    navigator.share({ title: '야망의 모양 진단', text });
+  } else {
+    navigator.clipboard.writeText(text);
+    alert('결과가 클립보드에 복사되었습니다');
+  }
+}
+</script>
+
+</body>
+</html>
