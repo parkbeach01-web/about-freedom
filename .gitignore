@@ -1,0 +1,23 @@
+# Wrangler 작업 캐시 (Cloudflare 인증 정보 포함, 절대 푸시 금지)
+.wrangler/
+
+# 로컬 환경변수 파일
+.dev.vars
+.env
+.env.local
+
+# Node 패키지 디렉터리 (있다면)
+node_modules/
+
+# 로그
+*.log
+npm-debug.log*
+
+# OS 부산물
+.DS_Store
+Thumbs.db
+
+# 내부 마스터 문서 — 공개 저장소에 노출 금지
+# (OneDrive로 백업, 필요 시 별도 비공개 저장소)
+business_model_master.md
+about_freedom_status.md

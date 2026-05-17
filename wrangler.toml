@@ -1,0 +1,13 @@
+# 어바웃 프리덤 — Cloudflare Pages + D1 설정
+# 작성일: 2026-05-17
+
+name = "about-freedom"
+compatibility_date = "2026-05-17"
+pages_build_output_dir = "."
+
+# D1 응답 데이터베이스 바인딩
+# Pages Function 안에서 env.about_freedom_responses 로 호출
+[[d1_databases]]
+binding = "about_freedom_responses"
+database_name = "about-freedom-responses"
+database_id = "8c81b8cb-8779-4f69-87ba-b23792a1f0f7"
