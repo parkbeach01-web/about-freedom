@@ -1,0 +1,1724 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About My Joy · 나의 즐거움에 대하여 — About Freedom</title>
+<meta name="description" content="나는 어떤 즐거움으로 살아가는 사람인지 알아봅니다. 36문항, 약 6~9분, 6가지 유형.">
+
+<meta property="og:title" content="About My Joy · 나의 즐거움에 대하여">
+<meta property="og:description" content="나는 어떤 즐거움으로 살아가는 사람인지 알아봅니다.">
+<meta property="og:type" content="website">
+
+<!-- Pretendard 가변 폰트 -->
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+
+<style>
+:root {
+  /* === 색 시스템 (홈 페이지와 동일) === */
+  --bg: #FAFAF8;
+  --bg-section: #FFFFFF;
+  --bg-card: #F5F4F0;
+  --bg-card-hover: #EFEDE6;
+
+  --ink-strong: #181715;
+  --ink: #1F1D1A;
+  --ink-soft: #5A5751;
+  --ink-faint: #95918A;
+
+  --line-strong: #2A2824;
+  --line: #D8D4CB;
+  --line-soft: #E8E4DC;
+
+  --light-warm: #FFF8E7;
+
+  /* === 8px 베이스라인 그리드 === */
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+  --space-5: 48px;
+  --space-6: 64px;
+  --space-7: 96px;
+  --space-8: 128px;
+  --space-9: 200px;
+
+  /* === 타이포 모듈러 스케일 === */
+  --type-xs: 12px;
+  --type-sm: 14px;
+  --type-base: 17px;
+  --type-md: 19px;
+  --type-lg: 26px;
+  --type-xl: 38px;
+  --type-2xl: 60px;
+  --type-3xl: 84px;
+
+  /* === 폰트 === */
+  --font-sans: 'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', sans-serif;
+
+  /* === 모션 곡선 === */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-natural: cubic-bezier(0.45, 0.05, 0.55, 0.95);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: var(--type-base);
+  line-height: 1.7;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+::selection {
+  background: var(--light-warm);
+  color: var(--ink-strong);
+}
+
+/* ============================================
+   안개 배경 (홈 페이지와 동일, 강도 절제)
+   ============================================ */
+
+.fog-base {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: var(--bg);
+}
+
+.fog-flow {
+  position: fixed;
+  inset: -10%;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.4;
+}
+
+.fog-flow-1 {
+  background:
+    radial-gradient(ellipse 70% 50% at 25% 30%,
+      rgba(40, 36, 30, 0.08) 0%,
+      rgba(40, 36, 30, 0.03) 40%,
+      transparent 70%);
+  animation: drift-1 60s var(--ease-natural) infinite;
+}
+
+.fog-flow-2 {
+  background:
+    radial-gradient(ellipse 60% 60% at 75% 70%,
+      rgba(40, 36, 30, 0.06) 0%,
+      rgba(40, 36, 30, 0.02) 45%,
+      transparent 75%);
+  animation: drift-2 80s var(--ease-natural) infinite;
+}
+
+@keyframes drift-1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(5%, 3%) scale(1.06); }
+  66% { transform: translate(-3%, 5%) scale(0.97); }
+}
+
+@keyframes drift-2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-4%, -3%) scale(1.05); }
+}
+
+.fog-noise {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0.20;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch' seed='7'/%3E%3CfeColorMatrix values='0 0 0 0 0.18 0 0 0 0 0.16 0 0 0 0 0.14 0 0 0 0.5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* spotlight (홈과 동일하지만 더 절제) */
+.spotlight {
+  position: fixed;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 3;
+  background: radial-gradient(circle,
+    rgba(255, 248, 231, 0.40) 0%,
+    rgba(255, 248, 231, 0.20) 25%,
+    rgba(255, 248, 231, 0.10) 45%,
+    transparent 70%);
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 1s var(--ease-out-expo);
+  mix-blend-mode: screen;
+  filter: blur(2px);
+  will-change: transform;
+}
+
+.spotlight.active { opacity: 1; }
+
+@media (max-width: 768px) {
+  .spotlight { display: none; }
+  .fog-flow { opacity: 0.3; }
+  .fog-noise { opacity: 0.12; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fog-flow { animation: none; }
+  .spotlight { display: none; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ============================================
+   레이아웃
+   ============================================ */
+
+.container {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: var(--space-6) var(--space-4);
+  position: relative;
+  z-index: 10;
+}
+
+/* ============================================
+   인트로 (시작 화면)
+   ============================================ */
+
+.intro {
+  padding: var(--space-9) 0 var(--space-7);
+  display: block;
+  animation: fadeUp 1.4s var(--ease-out-expo) both;
+}
+
+.intro.hidden { display: none; }
+
+.intro-mark {
+  display: inline-block;
+  font-size: var(--type-xs);
+  letter-spacing: 0.32em;
+  color: var(--ink-faint);
+  font-weight: 500;
+  margin-bottom: var(--space-7);
+  padding-left: var(--space-4);
+  border-left: 1px solid var(--line);
+}
+
+.intro-en {
+  font-size: clamp(18px, 2.2vw, 22px);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--ink-faint);
+  letter-spacing: 0.04em;
+  margin-bottom: var(--space-1);
+  display: block;
+}
+
+.intro-title {
+  font-size: clamp(40px, 6.5vw, 60px);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+  margin-bottom: var(--space-6);
+  color: var(--ink-strong);
+}
+
+.intro-subtitle {
+  font-size: clamp(17px, 2vw, 19px);
+  font-weight: 400;
+  color: var(--ink);
+  line-height: 1.85;
+  margin-bottom: var(--space-6);
+  max-width: 520px;
+  letter-spacing: -0.005em;
+}
+
+.intro-meta {
+  display: flex;
+  gap: var(--space-3);
+  font-size: var(--type-xs);
+  letter-spacing: 0.18em;
+  color: var(--ink-soft);
+  font-weight: 500;
+  text-transform: uppercase;
+  margin-bottom: var(--space-7);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--line-soft);
+}
+
+.intro-meta span {
+  position: relative;
+}
+
+.intro-meta span:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: calc(var(--space-3) * -0.5);
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2px;
+  height: 2px;
+  background: var(--ink-faint);
+  border-radius: 50%;
+}
+
+.start-btn {
+  background: var(--ink-strong);
+  color: var(--bg);
+  border: none;
+  padding: 22px 56px;
+  font-family: var(--font-sans);
+  font-size: var(--type-base);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition:
+    background 0.4s var(--ease-out-expo),
+    transform 0.4s var(--ease-out-expo);
+  margin-bottom: var(--space-7);
+}
+
+.start-btn:hover {
+  background: var(--ink);
+  transform: translateY(-2px);
+}
+
+.start-btn:focus-visible {
+  outline: 2px solid var(--ink-strong);
+  outline-offset: 4px;
+}
+
+.intro-quote {
+  margin-top: var(--space-7);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--line-soft);
+  font-size: var(--type-base);
+  font-style: italic;
+  color: var(--ink-soft);
+  line-height: 1.85;
+  max-width: 480px;
+}
+
+.intro-quote-author {
+  display: block;
+  margin-top: var(--space-2);
+  font-size: var(--type-xs);
+  letter-spacing: 0.28em;
+  color: var(--ink-faint);
+  font-style: normal;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+/* ============================================
+   진단 (질문 화면)
+   ============================================ */
+
+.quiz {
+  padding: var(--space-7) 0;
+  display: none;
+  animation: fadeUp 0.8s var(--ease-out-expo) both;
+}
+
+.quiz.active { display: block; }
+
+/* 프로그레스 */
+.progress-bar {
+  margin-bottom: var(--space-7);
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: var(--space-3);
+  font-size: var(--type-xs);
+  letter-spacing: 0.18em;
+  color: var(--ink-soft);
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.progress-current {
+  color: var(--ink-strong);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.progress-total {
+  color: var(--ink-faint);
+}
+
+.progress-section {
+  color: var(--ink-faint);
+}
+
+.progress-track {
+  height: 1px;
+  background: var(--line-soft);
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background: var(--ink-strong);
+  transition: width 0.6s var(--ease-out-expo);
+}
+
+/* 질문 */
+.question-block {
+  animation: fadeUp 0.6s var(--ease-out-expo);
+}
+
+.question-text {
+  font-size: clamp(22px, 3.2vw, 28px);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.45;
+  color: var(--ink-strong);
+  margin-bottom: var(--space-6);
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.option {
+  display: block;
+  padding: var(--space-4) var(--space-5);
+  background: var(--bg-section);
+  border: 1px solid var(--line);
+  cursor: pointer;
+  transition:
+    background 0.4s var(--ease-out-expo),
+    border-color 0.4s var(--ease-out-expo),
+    transform 0.4s var(--ease-out-expo);
+  position: relative;
+  font-size: var(--type-base);
+  line-height: 1.7;
+  color: var(--ink);
+  letter-spacing: -0.005em;
+}
+
+.option:hover {
+  background: var(--bg-card);
+  border-color: var(--ink-soft);
+  transform: translateX(4px);
+}
+
+.option.selected {
+  background: var(--ink-strong);
+  border-color: var(--ink-strong);
+  color: var(--bg);
+}
+
+.option.selected:hover {
+  background: var(--ink);
+  transform: translateX(4px);
+}
+
+.option:focus-visible {
+  outline: 2px solid var(--ink-strong);
+  outline-offset: 4px;
+}
+
+/* 5점 척도 */
+.scale {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-top: var(--space-5);
+}
+
+.scale-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--space-2);
+}
+
+.scale-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 64px;
+  padding: var(--space-3) var(--space-2);
+  background: var(--bg-section);
+  border: 1px solid var(--line);
+  cursor: pointer;
+  font-family: var(--font-sans);
+  font-size: var(--type-sm);
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: -0.005em;
+  line-height: 1.35;
+  text-align: center;
+  /* 한국어 어절 단위로 줄바꿈 — "매우 / 아니다"처럼 단어가 유지되도록 */
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  transition:
+    background 0.4s var(--ease-out-expo),
+    border-color 0.4s var(--ease-out-expo),
+    color 0.4s var(--ease-out-expo),
+    transform 0.4s var(--ease-out-expo);
+}
+
+.scale-btn:hover {
+  background: var(--bg-card);
+  border-color: var(--ink-soft);
+  transform: translateY(-2px);
+}
+
+.scale-btn.selected {
+  background: var(--ink-strong);
+  border-color: var(--ink-strong);
+  color: var(--bg);
+}
+
+.scale-btn.selected:hover {
+  background: var(--ink);
+}
+
+.scale-btn:focus-visible {
+  outline: 2px solid var(--ink-strong);
+  outline-offset: 4px;
+}
+
+.scale-anchors {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-sans);
+  font-size: var(--type-xs);
+  color: var(--ink-faint);
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 540px) {
+  .scale-row {
+    gap: 6px;
+  }
+  .scale-btn {
+    min-height: 72px;       /* 두 줄 들어갈 여유 */
+    padding: 10px 4px;
+    font-size: 13px;
+    line-height: 1.3;
+  }
+  .scale-anchors { display: none; }
+}
+
+/* 네비게이션 */
+.nav-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: var(--space-7);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--line-soft);
+}
+
+.nav-btn {
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--ink);
+  padding: 14px 28px;
+  font-family: var(--font-sans);
+  font-size: var(--type-sm);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition:
+    background 0.4s var(--ease-out-expo),
+    border-color 0.4s var(--ease-out-expo),
+    color 0.4s var(--ease-out-expo);
+}
+
+.nav-btn:hover:not(:disabled) {
+  background: var(--bg-card);
+  border-color: var(--ink-soft);
+}
+
+.nav-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.nav-btn.next {
+  background: var(--ink-strong);
+  border-color: var(--ink-strong);
+  color: var(--bg);
+}
+
+.nav-btn.next:hover:not(:disabled) {
+  background: var(--ink);
+  border-color: var(--ink);
+}
+
+.nav-btn.next:disabled {
+  background: var(--line);
+  border-color: var(--line);
+  color: var(--bg);
+}
+
+/* ============================================
+   결과 화면
+   ============================================ */
+
+.result {
+  padding: var(--space-7) 0;
+  display: none;
+  animation: fadeUp 1s var(--ease-out-expo) both;
+}
+
+.result.active { display: block; }
+
+/* 결과 헤더 */
+.result-header {
+  text-align: left;
+  margin-bottom: var(--space-7);
+  padding-bottom: var(--space-6);
+  border-bottom: 1px solid var(--line);
+}
+
+.result-label {
+  font-size: var(--type-xs);
+  letter-spacing: 0.32em;
+  color: var(--ink-faint);
+  font-weight: 500;
+  margin-bottom: var(--space-3);
+  text-transform: uppercase;
+}
+
+.result-emoji {
+  font-size: 36px;
+  display: block;
+  margin-bottom: var(--space-3);
+  filter: grayscale(0.3);
+}
+
+.result-title {
+  font-size: clamp(40px, 6vw, 56px);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 1.1;
+  color: var(--ink-strong);
+  margin-bottom: var(--space-3);
+}
+
+.result-tagline {
+  font-size: var(--type-md);
+  font-weight: 400;
+  color: var(--ink-soft);
+  letter-spacing: -0.01em;
+  line-height: 1.5;
+}
+
+/* 공통 도입부 */
+.common-intro {
+  background: var(--bg-section);
+  border-left: 2px solid var(--ink-strong);
+  padding: var(--space-5) var(--space-5);
+  margin-bottom: var(--space-7);
+  font-size: var(--type-base);
+  line-height: 1.85;
+  color: var(--ink);
+  letter-spacing: -0.005em;
+}
+
+.common-intro p {
+  margin-bottom: var(--space-2);
+}
+.common-intro p:last-child {
+  margin-bottom: 0;
+}
+
+.common-intro-emphasis {
+  margin-top: var(--space-3) !important;
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--line-soft);
+  color: var(--ink-strong) !important;
+  font-weight: 500;
+}
+
+/* 좌표 시각화 */
+.axis-viz {
+  margin-bottom: var(--space-7);
+  padding: var(--space-5);
+  background: var(--bg-section);
+  border: 1px solid var(--line);
+}
+
+.axis-viz-label {
+  font-size: var(--type-xs);
+  letter-spacing: 0.32em;
+  color: var(--ink-faint);
+  font-weight: 500;
+  margin-bottom: var(--space-4);
+  text-transform: uppercase;
+}
+
+.axis-grid {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  max-width: 300px;
+  margin: 0 auto;
+  border: 1px solid var(--line);
+  background:
+    linear-gradient(to right, transparent calc(50% - 1px), var(--line-soft) calc(50% - 1px), var(--line-soft) calc(50% + 1px), transparent calc(50% + 1px)),
+    linear-gradient(to bottom, transparent calc(50% - 1px), var(--line-soft) calc(50% - 1px), var(--line-soft) calc(50% + 1px), transparent calc(50% + 1px));
+}
+
+.axis-label {
+  position: absolute;
+  font-size: var(--type-xs);
+  letter-spacing: 0.18em;
+  color: var(--ink-soft);
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.axis-label.top { top: -28px; left: 50%; transform: translateX(-50%); }
+.axis-label.bottom { bottom: -28px; left: 50%; transform: translateX(-50%); }
+.axis-label.left { left: -8px; top: 50%; transform: translate(-100%, -50%); }
+.axis-label.right { right: -8px; top: 50%; transform: translate(100%, -50%); }
+
+.axis-dot {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  background: var(--ink-strong);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 0 4px rgba(24, 23, 21, 0.1);
+}
+
+/* 새 결과지 v2 — 챕터 */
+.result-chapter {
+  margin-bottom: var(--space-7);
+  padding-bottom: var(--space-6);
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.result-chapter:last-of-type {
+  border-bottom: none;
+}
+
+.result-chapter-mark {
+  font-size: var(--type-xs);
+  letter-spacing: 0.32em;
+  color: var(--ink-faint);
+  font-weight: 600;
+  margin-bottom: var(--space-2);
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.result-chapter-mark::before {
+  content: '';
+  width: 32px;
+  height: 1px;
+  background: var(--ink-strong);
+}
+
+.result-chapter-title {
+  font-size: clamp(28px, 4vw, 36px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--ink-strong);
+  margin-bottom: var(--space-4);
+  line-height: 1.25;
+}
+
+.result-chapter-body {
+  font-size: var(--type-md);
+  line-height: 2.05;
+  color: var(--ink);
+  letter-spacing: -0.005em;
+}
+
+.result-chapter-body p {
+  margin-bottom: var(--space-3);
+}
+.result-chapter-body p:last-child {
+  margin-bottom: 0;
+}
+
+/* 새 결과지 v2 — 클로징 + 추천 매체 */
+.result-closing-section {
+  margin-top: var(--space-7);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--line);
+}
+
+.result-closing-summary {
+  font-size: var(--type-md);
+  line-height: 1.85;
+  color: var(--ink-strong);
+  font-weight: 400;
+  letter-spacing: -0.015em;
+  margin-bottom: var(--space-6);
+  font-style: italic;
+}
+
+.result-closing-summary p {
+  margin-bottom: var(--space-2);
+}
+.result-closing-summary p:last-child {
+  margin-bottom: 0;
+}
+
+.rec-label {
+  font-size: var(--type-xs);
+  letter-spacing: 0.32em;
+  color: var(--ink-faint);
+  font-weight: 600;
+  margin-bottom: var(--space-5);
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.rec-label::before {
+  content: '';
+  width: 32px;
+  height: 1px;
+  background: var(--ink-strong);
+}
+
+.rec-item {
+  padding: var(--space-4) 0;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.rec-item:last-child {
+  border-bottom: none;
+}
+
+.rec-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: var(--space-2);
+  gap: var(--space-3);
+}
+
+.rec-title-block {
+  flex: 1;
+}
+
+.rec-title {
+  font-size: var(--type-md);
+  font-weight: 700;
+  color: var(--ink-strong);
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-1);
+  line-height: 1.4;
+}
+
+.rec-author {
+  font-size: var(--type-sm);
+  color: var(--ink-faint);
+  letter-spacing: 0.02em;
+}
+
+.rec-type {
+  font-size: var(--type-xs);
+  letter-spacing: 0.28em;
+  color: var(--ink-faint);
+  font-weight: 500;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.rec-desc {
+  font-size: var(--type-base);
+  line-height: 1.85;
+  color: var(--ink-soft);
+  letter-spacing: -0.005em;
+}
+
+/* 기존 v1 결과지 호환 (다른 5유형용) */
+.result-section {
+  margin-bottom: var(--space-7);
+  padding-bottom: var(--space-6);
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.result-section:last-of-type {
+  border-bottom: none;
+}
+
+.result-section-mark {
+  font-size: var(--type-xs);
+  letter-spacing: 0.32em;
+  color: var(--ink-faint);
+  font-weight: 600;
+  margin-bottom: var(--space-2);
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.result-section-mark::before {
+  content: '';
+  width: 32px;
+  height: 1px;
+  background: var(--ink-strong);
+}
+
+.result-section-title {
+  font-size: clamp(24px, 3.5vw, 30px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--ink-strong);
+  margin-bottom: var(--space-3);
+  line-height: 1.3;
+}
+
+.result-section-body {
+  font-size: var(--type-md);
+  line-height: 2.05;
+  color: var(--ink);
+  letter-spacing: -0.005em;
+}
+
+.result-section-body p { margin-bottom: var(--space-2); }
+
+.shadow-box {
+  background: var(--bg-card);
+  padding: var(--space-4);
+  border-left: 2px solid var(--ink-strong);
+}
+
+.next-step {
+  background: var(--ink-strong);
+  color: var(--bg);
+  padding: var(--space-5);
+}
+
+.next-step .result-section-mark {
+  color: rgba(250, 250, 248, 0.6);
+}
+
+.next-step .result-section-mark::before {
+  background: var(--bg);
+}
+
+.next-step .result-section-title {
+  color: var(--bg);
+}
+
+.next-step .result-section-body {
+  color: rgba(250, 250, 248, 0.92);
+}
+
+.book-rec {
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+  padding: var(--space-4);
+  background: var(--bg-section);
+  border: 1px solid var(--line);
+}
+
+.book-icon {
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.book-content { flex: 1; }
+.book-title {
+  font-weight: 700;
+  margin-bottom: 4px;
+  font-size: var(--type-md);
+  color: var(--ink-strong);
+  letter-spacing: -0.02em;
+}
+.book-author {
+  font-size: var(--type-sm);
+  color: var(--ink-faint);
+  margin-bottom: var(--space-2);
+  letter-spacing: 0.02em;
+}
+.book-reason {
+  font-size: var(--type-base);
+  line-height: 1.85;
+  color: var(--ink-soft);
+  letter-spacing: -0.005em;
+}
+
+/* 클로징 (액션 버튼) */
+.closing {
+  margin-top: var(--space-7);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--line);
+}
+
+.closing-text {
+  color: var(--ink-soft);
+  font-size: var(--type-base);
+  line-height: 1.85;
+  margin-bottom: var(--space-5);
+  font-style: italic;
+}
+
+.action-buttons {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.action-btn {
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--ink);
+  padding: 14px 28px;
+  font-family: var(--font-sans);
+  font-size: var(--type-sm);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition:
+    background 0.4s var(--ease-out-expo),
+    border-color 0.4s var(--ease-out-expo);
+}
+
+.action-btn:hover {
+  background: var(--bg-card);
+  border-color: var(--ink-soft);
+}
+
+.action-btn.primary {
+  background: var(--ink-strong);
+  border-color: var(--ink-strong);
+  color: var(--bg);
+}
+
+.action-btn.primary:hover {
+  background: var(--ink);
+  border-color: var(--ink);
+}
+
+/* ============================================
+   애니메이션
+   ============================================ */
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================
+   모바일
+   ============================================ */
+
+@media (max-width: 768px) {
+  :root {
+    --space-9: 128px;
+    --space-7: 64px;
+    --space-6: 48px;
+    --type-md: 18px;
+  }
+
+  .container {
+    padding: var(--space-5) 20px;
+  }
+
+  .intro {
+    padding: var(--space-7) 0 var(--space-6);
+  }
+
+  .intro-mark {
+    padding-left: var(--space-3);
+  }
+
+  .start-btn {
+    padding: 18px 40px;
+    width: 100%;
+  }
+
+  .option {
+    padding: var(--space-3) var(--space-4);
+  }
+
+  .nav-btn {
+    padding: 12px 20px;
+    font-size: var(--type-xs);
+  }
+
+  .common-intro {
+    padding: var(--space-4);
+  }
+
+  .axis-viz {
+    padding: var(--space-4);
+  }
+
+  .axis-grid {
+    max-width: 240px;
+  }
+
+  .next-step {
+    padding: var(--space-4);
+  }
+
+  .rec-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-1);
+  }
+}
+
+@media (max-width: 480px) {
+  .result-chapter-title,
+  .result-section-title {
+    font-size: 22px;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- 안개 배경 -->
+<div class="fog-base"></div>
+<div class="fog-flow fog-flow-1"></div>
+<div class="fog-flow fog-flow-2"></div>
+<div class="fog-noise"></div>
+
+<!-- 마우스 spotlight -->
+<div class="spotlight" id="spotlight"></div>
+
+<div class="container">
+
+  <!-- ============ 인트로 ============ -->
+  <section class="intro" id="intro">
+    <div class="intro-mark">ABOUT FREEDOM · 일상의 깨달음</div>
+
+    <h1 class="intro-title">
+      <span class="intro-en">About My Joy</span>
+      나의 즐거움에 대하여
+    </h1>
+
+    <p class="intro-subtitle">
+      나는 어떤 즐거움으로 살아가는 사람인지 알아봅니다.<br>
+      큰 즐거움이 좋은 것도, 잔잔한 즐거움이 부족한 것도 아닙니다.<br>
+      사람마다 차오르는 자리가 다를 뿐입니다.
+    </p>
+
+    <div class="intro-meta">
+      <span>36문항</span>
+      <span>약 6~9분</span>
+      <span>6가지 유형</span>
+    </div>
+
+    <button class="start-btn" onclick="startQuiz()">
+      <span>시작하기 →</span>
+    </button>
+
+    <div class="intro-quote">
+      "큰 즐거움을 찾는 줄 알았지만,<br>
+      사실 가장 작은 자리에서 가장 깊이 차오르고 있었다."
+      <span class="intro-quote-author">— FROM A QUIET JOY</span>
+    </div>
+  </section>
+
+  <!-- ============ 진단 ============ -->
+  <section class="quiz" id="quiz">
+    <div class="progress-bar">
+      <div class="progress-info">
+        <span><span class="progress-current" id="progressNum">01</span><span class="progress-total"> / 36</span></span>
+        <span class="progress-section" id="sectionLabel">현재의 나</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill" style="width: 2.78%"></div>
+      </div>
+    </div>
+
+    <div id="questionContainer"></div>
+
+    <div class="nav-buttons">
+      <button class="nav-btn" id="prevBtn" onclick="prevQuestion()">← 이전</button>
+      <button class="nav-btn next" id="nextBtn" onclick="nextQuestion()" disabled>다음 →</button>
+    </div>
+  </section>
+
+  <!-- ============ 결과 ============ -->
+  <section class="result" id="result"></section>
+
+</div>
+
+<script>
+// ============ 마우스 spotlight ============
+(function() {
+  const spotlight = document.getElementById('spotlight');
+  if (!spotlight) return;
+  if (window.matchMedia('(max-width: 768px)').matches) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  let mouseX = window.innerWidth / 2;
+  let mouseY = window.innerHeight / 2;
+  let currentX = mouseX;
+  let currentY = mouseY;
+  let velocityX = 0;
+  let velocityY = 0;
+  let isVisible = false;
+
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    if (!isVisible) {
+      isVisible = true;
+      spotlight.classList.add('active');
+    }
+  });
+
+  document.addEventListener('mouseleave', () => {
+    isVisible = false;
+    spotlight.classList.remove('active');
+  });
+
+  function animate() {
+    const stiffness = 0.10;
+    const damping = 0.78;
+    const dx = mouseX - currentX;
+    const dy = mouseY - currentY;
+    velocityX = velocityX * damping + dx * stiffness;
+    velocityY = velocityY * damping + dy * stiffness;
+    currentX += velocityX;
+    currentY += velocityY;
+    spotlight.style.transform =
+      `translate3d(${currentX}px, ${currentY}px, 0) translate(-50%, -50%)`;
+    requestAnimationFrame(animate);
+  }
+  animate();
+})();
+
+</script>
+<script>
+// ============ 데이터 ============
+// About My Joy v1 — 5점 척도 진단지
+// 한 문항은 한 연료(calm/relate/explore)를 측정. 응답 1~5 → 강도 25/45/55/65/85 매핑
+// 36문항 / 3섹션 × 12문항 / 각 섹션 calm 4·relate 4·explore 4 균등 배분
+
+const questions = [
+  // === SECTION 1: 현재의 나 (Q1-12) — 평소 즐거움을 어떻게 채우는가 ===
+  { section: '현재의 나', fuel: 'calm',    text: '혼자 있는 시간에 마음이 가장 편하다' },
+  { section: '현재의 나', fuel: 'relate',  text: '가까운 사람들과 함께 있을 때 가장 살아 있다는 느낌이 든다' },
+  { section: '현재의 나', fuel: 'explore', text: '새로운 것에 자주 끌린다' },
+  { section: '현재의 나', fuel: 'calm',    text: '조용한 환경에서 가장 잘 충전된다' },
+  { section: '현재의 나', fuel: 'relate',  text: '누군가의 안부를 챙기는 것이 자연스럽다' },
+  { section: '현재의 나', fuel: 'explore', text: '안 가본 곳·안 해본 일이 보이면 한번 해보고 싶다' },
+  { section: '현재의 나', fuel: 'calm',    text: '별일 없는 평범한 하루가 좋다' },
+  { section: '현재의 나', fuel: 'relate',  text: '혼자 좋은 일이 있어도 함께 나눠야 비로소 즐겁다' },
+  { section: '현재의 나', fuel: 'explore', text: '익숙한 일상에 작은 변화를 자주 만든다' },
+  { section: '현재의 나', fuel: 'calm',    text: '사람들과 어울리는 시간보다 혼자 있는 시간이 더 기다려진다' },
+  { section: '현재의 나', fuel: 'relate',  text: '사람들 사이에서 에너지를 얻는 편이다' },
+  { section: '현재의 나', fuel: 'explore', text: '배우거나 만드는 것이 일상의 즐거움이다' },
+
+  // === SECTION 2: 즐거움이 차오르는 순간 (Q13-24) — 어떤 자극에 강하게 반응하는가 ===
+  { section: '즐거움이 차오르는 순간', fuel: 'calm',    text: '혼자 좋아하는 책이나 음악에 빠져 있을 때 가장 즐겁다' },
+  { section: '즐거움이 차오르는 순간', fuel: 'relate',  text: '친구와 오래 이야기 나눌 때 가장 즐겁다' },
+  { section: '즐거움이 차오르는 순간', fuel: 'explore', text: '처음 가본 동네를 걸을 때 마음이 일렁인다' },
+  { section: '즐거움이 차오르는 순간', fuel: 'calm',    text: '산책이나 멍 때리는 시간이 작은 행복으로 느껴진다' },
+  { section: '즐거움이 차오르는 순간', fuel: 'relate',  text: '누군가에게 줄 선물을 고르는 시간이 즐겁다' },
+  { section: '즐거움이 차오르는 순간', fuel: 'explore', text: '새로운 분야를 막 배우기 시작할 때가 가장 짜릿하다' },
+  { section: '즐거움이 차오르는 순간', fuel: 'calm',    text: '조용히 무언가를 정리하거나 손질하는 데서 만족을 느낀다' },
+  { section: '즐거움이 차오르는 순간', fuel: 'relate',  text: '함께 웃는 자리에서 가장 살아 있는 느낌이 든다' },
+  { section: '즐거움이 차오르는 순간', fuel: 'explore', text: '예상치 못한 발견이 있을 때 하루가 환해진다' },
+  { section: '즐거움이 차오르는 순간', fuel: 'calm',    text: '내 페이스대로 천천히 흘러갈 때 가장 편안한 즐거움이 든다' },
+  { section: '즐거움이 차오르는 순간', fuel: 'relate',  text: '남이 잘된 일을 들었을 때 내 일처럼 기쁘다' },
+  { section: '즐거움이 차오르는 순간', fuel: 'explore', text: '내가 만들어 낸 무언가가 형태를 갖출 때 가장 살아 있다' },
+
+  // === SECTION 3: 회복과 갈망 (Q25-36) — 지칠 때 어디서 채우는가, 진짜 원하는 모양 ===
+  { section: '회복과 갈망', fuel: 'calm',    text: '지치면 사람을 피하고 혼자만의 시간을 가진다' },
+  { section: '회복과 갈망', fuel: 'relate',  text: '지치면 가까운 사람과 시간을 보내며 회복한다' },
+  { section: '회복과 갈망', fuel: 'explore', text: '지치면 새로운 경험을 통해 환기한다' },
+  { section: '회복과 갈망', fuel: 'calm',    text: '여행을 가더라도 호젓한 곳을 선호한다' },
+  { section: '회복과 갈망', fuel: 'relate',  text: '내가 좋아하는 사람들이 가까이 있는 삶이 가장 부럽다' },
+  { section: '회복과 갈망', fuel: 'explore', text: '여행지에서 안 가본 길로 일부러 들어가는 편이다' },
+  { section: '회복과 갈망', fuel: 'calm',    text: '5년 뒤에도 단순하고 고요한 일상을 원한다' },
+  { section: '회복과 갈망', fuel: 'relate',  text: '5년 뒤에도 곁에 좋은 사람들이 있는 자리를 원한다' },
+  { section: '회복과 갈망', fuel: 'explore', text: '5년 뒤에도 여전히 새로운 것에 빠져 있고 싶다' },
+  { section: '회복과 갈망', fuel: 'calm',    text: '결국 회복은 혼자 있는 시간에서 온다' },
+  { section: '회복과 갈망', fuel: 'relate',  text: '함께 웃을 사람이 없을 때 가장 깊은 회의가 든다' },
+  { section: '회복과 갈망', fuel: 'explore', text: '더 이상 새로울 게 없다고 느낄 때 가장 깊은 회의가 든다' }
+];
+
+// 5점 응답 → 강도 매핑
+const INTENSITY_MAP = { 1: 25, 2: 45, 3: 55, 4: 65, 5: 85 };
+const SCALE_LABELS = ['매우 아니다', '아니다', '보통', '그렇다', '매우 그렇다'];
+
+// ============ 6가지 결과 유형 ============
+const archetypes = {
+  // ===== 잔잔함(intensity 평균 < 55) × 연료별 3유형 =====
+  quiet_walker: {
+    emoji: '🌿',
+    title: '고요한 산책자',
+    tagline: '혼자만의 시간에서 잔잔하게 차오르는 사람',
+    shape: `당신의 즐거움은 혼자 있는 자리에서 천천히 차오릅니다. 시끄러운 자극이나 강한 사건이 있어야 살아 있다고 느끼지 않습니다. 오히려 별일 없는 평범한 하루, 조용한 환경, 자기 페이스대로 흘러가는 시간에서 가장 편안한 즐거움을 느낍니다. 이건 당신이 무뎌서가 아닙니다. 당신의 즐거움은 잔잔하게 흐르도록 설계되어 있고, 그 자리에서 가장 또렷합니다.`,
+    strength: `당신은 외부 자극에 휘둘리지 않습니다. 트렌드, 모임, 새 자극에 끌려가지 않고 자기 페이스를 지킵니다. 그래서 당신 곁에 있는 사람들은 안정감을 느낍니다. 또한 당신은 작은 것에서 즐거움을 발견하는 사람이라, 같은 환경에서도 더 자주 만족합니다. 이건 가장 손해 보지 않는 형태의 즐거움입니다.`,
+    shadow: `당신의 잔잔함이 다른 사람들 눈에는 "재미없는 사람"으로 보일 수 있습니다. 사회적 자리에서 자기 즐거움을 잘 표현하지 않기 때문에, 가끔 "저 사람은 뭘 좋아하는지 모르겠다"는 말을 듣기도 합니다. 그러다가 자기 즐거움을 의심하기 시작합니다. "내가 너무 단조롭게 사나" 하는 회의. 그건 당신의 즐거움이 부족해서가 아니라, 외부 기준이 당신의 자리를 못 알아보기 때문입니다.`,
+    next: `자기 즐거움을 자기가 인정하는 일부터 시작하세요. 일주일에 한 번, 가장 좋았던 잔잔한 순간을 한 줄로 적어보세요. 시간이 쌓이면 당신의 즐거움이 어떤 결인지 또렷이 보입니다. 그리고 당신의 페이스를 깨는 자리에는 부드럽게 거리를 두세요. 잔잔함은 지키는 사람의 자리입니다.`,
+    book: {
+      title: '월든',
+      author: '헨리 데이비드 소로',
+      reason: '한 사람이 숲에서 2년 동안 가장 단순한 일들을 가장 깊이 살아낸 기록입니다. 잔잔한 자리에서 어떤 즐거움이 가능한지를, 한 권의 일기로 보여줍니다.'
+    }
+  },
+
+  gentle_companion: {
+    emoji: '🌾',
+    title: '다정한 동행자',
+    tagline: '가까운 사람들과의 잔잔한 자리에서 채워지는 사람',
+    shape: `당신의 즐거움은 사람들과의 연결에서 옵니다. 다만 그게 시끄럽고 화려한 자리가 아닙니다. 가까운 몇 사람과 오래 머무는 시간, 안부를 묻는 짧은 대화, 함께 밥 먹는 평범한 자리. 그런 자리에서 천천히 차오릅니다. 당신은 많은 사람을 만나는 사람이 아니라, 같은 사람들과 깊이 머무는 사람입니다.`,
+    strength: `당신 곁에 있는 사람들은 안전함을 느낍니다. 당신은 큰 약속을 하지 않고, 작은 마음을 오래 가져가는 사람이라서 그렇습니다. 함께 있을 때 부담스럽지 않고, 떠나도 다시 돌아올 수 있는 자리입니다. 이건 시간이 쌓일수록 단단해지는 자산입니다. 빠르게 만들 수 없는 형태의 즐거움이고, 빠르게 사라지지도 않습니다.`,
+    shadow: `당신은 가까운 사람들의 상태에 자주 영향을 받습니다. 누군가가 힘들면 당신도 함께 무거워지고, 관계가 멀어지면 깊이 흔들립니다. 그러다 보면 당신의 즐거움이 다른 사람의 상태에 종속됩니다. 또 새로운 사람을 만드는 일이 어렵게 느껴져, 기존 관계가 멀어질 때 회복이 늦어지기도 합니다.`,
+    next: `당신의 즐거움이 어디서 오는지 가까운 사람에게 한 번 말해보세요. "너랑 이렇게 있는 시간이 좋다"는 작은 표현이 관계를 단단하게 만듭니다. 그리고 가까운 자리 외에 한 명, 가벼운 관계 한 자리를 만들어두세요. 당신의 깊은 관계가 흔들릴 때 숨 쉴 자리가 됩니다.`,
+    book: {
+      title: '나의 라임 오렌지나무',
+      author: 'J. M. 바스콘셀로스',
+      reason: '한 아이가 자기만의 자리에서 한 사람과 깊은 관계를 만들어가는 이야기입니다. 작은 자리에서 가장 다정한 즐거움이 만들어진다는 사실을, 어린 시점으로 보여줍니다.'
+    }
+  },
+
+  slow_observer: {
+    emoji: '🍃',
+    title: '느긋한 관찰자',
+    tagline: '작은 새로움을 천천히 음미하는 사람',
+    shape: `당신의 즐거움은 새로움에서 오지만, 그 새로움이 거창하지 않습니다. 처음 가본 골목, 새로 알게 된 단어, 작은 변화 하나. 그런 발견들에 가만히 머무는 데서 즐거움을 느낍니다. 빠르게 다음으로 넘어가지 않고, 한 자리에서 오래 음미하는 사람입니다. 발견의 양보다 깊이가 당신의 즐거움을 만듭니다.`,
+    strength: `당신은 같은 일상에서도 더 많이 봅니다. 다른 사람들이 지나친 자리에서 무언가를 발견해내는 눈을 가지고 있습니다. 그래서 당신의 일상은 표면적으로는 단조로워 보여도 안에서는 풍부합니다. 새것을 사거나 새 자극을 찾지 않아도, 일상이 늘 새로 보입니다. 이건 가장 비용이 적게 드는 형태의 즐거움입니다.`,
+    shadow: `당신은 빠른 환경에서 자기 자리를 잃기 쉽습니다. 사람들이 "그다음은?", "또 뭐?" 하고 재촉하면, 당신이 음미하던 자리가 흔들립니다. 또 당신의 즐거움이 외부에 잘 안 보이기 때문에, 가끔 자기 즐거움을 의심합니다. "내가 너무 작은 것에만 만족하나" 하는 회의. 그건 당신의 즐거움이 작은 게 아니라, 깊은 것입니다.`,
+    next: `당신이 발견한 작은 새로움을 한 자리에 모아두세요. 사진, 메모, 한 줄 일기. 시간이 쌓이면 당신이 본 것이 적지 않다는 사실이 또렷해집니다. 그리고 빠른 환경에서는 당신의 페이스를 의식적으로 지키세요. 음미하는 사람의 자리는 시간이 만들어줍니다.`,
+    book: {
+      title: '느리게 산다는 것의 의미',
+      author: '피에르 쌍소',
+      reason: '빠르게 흘러가는 시대에 천천히 사는 일에 대한 한 사람의 사색입니다. 작은 자리에서 깊은 발견이 어떻게 만들어지는지를, 잔잔한 호흡으로 짚어줍니다.'
+    }
+  },
+
+  // ===== 치열함(intensity 평균 ≥ 55) × 연료별 3유형 =====
+  deep_diver: {
+    emoji: '🌊',
+    title: '깊은 잠수자',
+    tagline: '혼자의 자리로 강하게 침잠하는 사람',
+    shape: `당신의 즐거움은 혼자만의 자리에서 옵니다. 다만 그게 잔잔한 평온이 아니라, 강한 몰입입니다. 좋아하는 작업, 책, 음악, 생각에 깊이 빠져드는 시간. 시간 가는 줄 모르고 한 자리에서 몇 시간을 보내는 사람입니다. 외부 자극이 들어오면 오히려 방해가 됩니다. 당신의 즐거움은 안으로 깊이 들어갈 때 가장 또렷합니다.`,
+    strength: `당신은 깊이의 사람입니다. 한 가지를 끝까지 가져가는 힘, 끝까지 파고드는 집중력을 가지고 있습니다. 그래서 당신이 만드는 결과물은 표면적이지 않습니다. 시간이 쌓인 자국이 보입니다. 또한 외부 자극에 의존하지 않기 때문에, 즐거움이 끊기지 않습니다. 환경이 어떻든 자기 자리로 돌아가면 충전됩니다.`,
+    shadow: `당신은 사람들과의 자리가 자주 피곤하게 느껴집니다. 가벼운 모임, 의미 없는 대화가 에너지를 빠르게 빼앗습니다. 그래서 점점 자기 자리로만 들어가게 되고, 그러다 보면 외로움이 잔잔하게 깔립니다. 또 자기 작업에 너무 깊이 빠져 일상이 흐트러지기도 합니다. 깊은 몰입은 일상의 균형을 자주 깨뜨립니다.`,
+    next: `당신의 자리는 지키되, 그 자리로 가는 일과 나오는 일 사이의 의식을 만들어두세요. 들어가는 의식(차 한 잔, 음악 하나)과 나오는 의식이 있으면 일상이 덜 흔들립니다. 그리고 같은 호흡의 사람을 한 명 알아두세요. 자주 만나지 않아도 됩니다. 같은 깊이로 가는 사람이 있다는 사실만으로 외로움이 줄어듭니다.`,
+    book: {
+      title: '몰입 Flow',
+      author: '미하이 칙센트미하이',
+      reason: '한 사람이 무언가에 깊이 빠져드는 순간, 그 안에서 어떤 일이 일어나는지를 한 평생 연구한 책입니다. 당신의 즐거움이 어떤 자리에서 가장 또렷해지는지를 학문적으로 짚어줍니다.'
+    }
+  },
+
+  bright_connector: {
+    emoji: '☀️',
+    title: '환한 연결자',
+    tagline: '사람들 속에서 강하게 빛나는 사람',
+    shape: `당신의 즐거움은 사람들 사이에서 옵니다. 다만 그게 잔잔한 동행이 아니라, 강한 에너지를 주고받는 자리입니다. 함께 웃고, 함께 흥분하고, 함께 만들어가는 시간. 그 안에서 당신은 가장 살아 있다고 느낍니다. 혼자 있을 때보다 사람들 속에 있을 때 에너지가 차오르는 사람입니다.`,
+    strength: `당신 곁에 있는 사람들은 함께 살아 있는 느낌을 받습니다. 당신은 에너지를 주는 사람이라, 모임의 분위기를 만들고 사람들의 마음을 움직입니다. 또한 관계의 폭이 넓고, 새로운 사람과도 빠르게 가까워집니다. 이건 누구나 가질 수 있는 게 아닌 자질입니다. 한 시대에 한 자리를 만들 수 있는 형태의 즐거움입니다.`,
+    shadow: `당신은 혼자 있는 시간이 어렵습니다. 외부 자극이 끊기면 에너지가 빠르게 떨어지고, 가끔 "내가 누구인지" 하는 공허가 옵니다. 그건 당신이 비어 있어서가 아니라, 당신의 즐거움이 관계 안에서 만들어지는 형태이기 때문입니다. 또 사람들의 기분에 자주 영향을 받아, 누군가 기분이 안 좋으면 자기 즐거움도 함께 흐려집니다.`,
+    next: `혼자만의 작은 자리를 하나 만들어두세요. 매일 15분이라도 좋습니다. 사람들 사이의 에너지가 끊겼을 때 무너지지 않으려면, 자기 안에 작은 닻이 필요합니다. 그리고 관계의 넓이를 자랑하기보다, 한두 사람과 깊은 자리도 함께 만들어두세요. 환한 자리는 깊은 자리와 함께일 때 가장 단단합니다.`,
+    book: {
+      title: '함께 자라기',
+      author: '김창준',
+      reason: '한 사람의 성장이 결국 다른 사람들과의 연결 안에서 일어난다는 사실을, 일상 언어로 짚어주는 책입니다. 당신처럼 관계 안에서 빛나는 사람에게 가장 가까운 자리입니다.'
+    }
+  },
+
+  fiery_explorer: {
+    emoji: '🔥',
+    title: '들끓는 탐험가',
+    tagline: '새로움에 강하게 끌려가는 사람',
+    shape: `당신의 즐거움은 새로움에서 옵니다. 다만 그게 작은 발견의 음미가 아니라, 강한 끌림과 도약입니다. 처음 보는 분야, 안 가본 도시, 한 번도 안 해본 일. 그 앞에 서면 당신은 망설이지 않고 발을 들입니다. 익숙한 자리에 오래 머무르면 답답함을 느낍니다. 당신의 즐거움은 끊임없이 새 자리를 찾을 때 가장 또렷합니다.`,
+    strength: `당신은 환경의 한계에 갇히지 않습니다. 사람들이 "여기까지"라고 정한 자리를 넘어, 다음 자리를 찾아냅니다. 그래서 당신은 자기 인생의 폭을 가장 넓게 가져갈 수 있는 사람입니다. 또한 학습 속도가 빠르고, 적응력이 높습니다. 한 분야에 발이 묶이지 않기 때문에 어떤 자리에서도 살아남습니다. 이건 변화의 시대에 가장 강한 형태의 즐거움입니다.`,
+    shadow: `당신은 한 자리에 오래 머물기 어렵습니다. 깊이가 만들어지기 전에 다음 자리로 옮겨가서, 결과물이 표면에 머무는 경우가 있습니다. 또 새로움에 끌려가는 호흡이 멈추면 빠르게 무력감이 옵니다. "이제 새로울 게 없다"는 회의가 깊은 자리까지 끌고 가기도 합니다. 끊임없이 새로움을 찾는 일은 동시에 끊임없이 비교하고 결핍을 느끼는 일입니다.`,
+    next: `새로움을 찾는 호흡은 그대로 두되, 한 가지를 1년 이상 가져가는 자리를 하나 만들어보세요. 어떤 분야든 좋습니다. 깊이가 만들어지는 자리를 한 군데 가지고 있으면, 다른 새로움이 더 풍부해집니다. 그리고 "새로울 게 없다"는 회의가 올 때는, 익숙한 자리에서 못 본 것을 찾아보세요. 깊이는 또 다른 형태의 새로움입니다.`,
+    book: {
+      title: '여행의 이유',
+      author: '김영하',
+      reason: '한 작가가 평생 새 자리를 찾아 떠난 기록과, 그 안에서 만난 자기 자신에 대한 사색입니다. 새로움에 끌리는 사람이 결국 무엇을 찾고 있는지를, 한 사람의 호흡으로 짚어줍니다.'
+    }
+  }
+};
+
+// ============ 상태 ============
+let currentQ = 0;
+let answers = new Array(questions.length).fill(null);
+
+// ============ 진단 시작 ============
+function startQuiz() {
+  document.getElementById('intro').style.display = 'none';
+  document.getElementById('quiz').classList.add('active');
+  renderQuestion();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ============ 문항 렌더 ============
+function renderQuestion() {
+  const q = questions[currentQ];
+  const container = document.getElementById('questionContainer');
+  const selected = answers[currentQ]; // 1~5 또는 null
+
+  container.innerHTML = `
+    <div class="question-block active">
+      <div class="q-section">SECTION · ${q.section}</div>
+      <div class="q-text">${q.text}</div>
+      <div class="scale">
+        <div class="scale-row">
+          ${SCALE_LABELS.map((label, i) => {
+            const val = i + 1;
+            return `
+              <button class="scale-btn ${selected === val ? 'selected' : ''}"
+                      onclick="selectOption(${val})"
+                      aria-label="${val}점: ${label}">
+                ${label}
+              </button>
+            `;
+          }).join('')}
+        </div>
+        <div class="scale-anchors">
+          <span>전혀 그렇지 않다</span>
+          <span>매우 그렇다</span>
+        </div>
+      </div>
+    </div>
+  `;
+
+  document.getElementById('progressNum').textContent = String(currentQ + 1).padStart(2, '0');
+  document.getElementById('sectionLabel').textContent = q.section;
+  document.getElementById('progressFill').style.width = `${((currentQ + 1) / questions.length) * 100}%`;
+  document.getElementById('prevBtn').disabled = currentQ === 0;
+  document.getElementById('nextBtn').disabled = answers[currentQ] === null;
+  document.getElementById('nextBtn').textContent = currentQ === questions.length - 1 ? '결과 보기 →' : '다음 →';
+}
+
+// 자동 진행 타이머 — 새 선택이 들어오면 리셋되어 마음 바꿀 여유를 줌
+let autoAdvanceTimer = null;
+
+function selectOption(value) {
+  // value: 1~5
+  answers[currentQ] = value;
+  renderQuestion();
+
+  // 기존 타이머가 있으면 취소하고 새로 시작 (debounce)
+  if (autoAdvanceTimer) clearTimeout(autoAdvanceTimer);
+  autoAdvanceTimer = setTimeout(() => {
+    autoAdvanceTimer = null;
+    nextQuestion();
+  }, 350);
+}
+
+function nextQuestion() {
+  if (autoAdvanceTimer) { clearTimeout(autoAdvanceTimer); autoAdvanceTimer = null; }
+  if (answers[currentQ] === null) return;
+  if (currentQ === questions.length - 1) {
+    showResult();
+  } else {
+    currentQ++;
+    renderQuestion();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
+
+function prevQuestion() {
+  if (autoAdvanceTimer) { clearTimeout(autoAdvanceTimer); autoAdvanceTimer = null; }
+  if (currentQ === 0) return;
+  currentQ--;
+  renderQuestion();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ============ 결과 계산 ============
+// About My Joy v1 계산 로직:
+// - 각 문항은 한 연료(calm/relate/explore)를 측정. 응답 1~5 → 강도 25/45/55/65/85
+// - avgIntensity: 36문항 강도 평균 — 잔잔함(<55) vs 치열함(≥55) 판단
+// - dominantFuel: 연료별 강도 평균이 가장 높은 연료. 동률 시 explore → relate → calm 우선
+// - 6유형 매핑:
+//   잔잔함: quiet_walker(calm) · gentle_companion(relate) · slow_observer(explore)
+//   치열함: deep_diver(calm) · bright_connector(relate) · fiery_explorer(explore)
+function calculateResult() {
+  const fuelSums = { calm: 0, relate: 0, explore: 0 };
+  const fuelCounts = { calm: 0, relate: 0, explore: 0 };
+  let intensitySum = 0;
+
+  answers.forEach((respVal, qIdx) => {
+    const fuel = questions[qIdx].fuel;
+    const intensity = INTENSITY_MAP[respVal];
+    fuelSums[fuel] += intensity;
+    fuelCounts[fuel] += 1;
+    intensitySum += intensity;
+  });
+
+  const fuelAverages = {
+    calm:    fuelCounts.calm    ? fuelSums.calm    / fuelCounts.calm    : 0,
+    relate:  fuelCounts.relate  ? fuelSums.relate  / fuelCounts.relate  : 0,
+    explore: fuelCounts.explore ? fuelSums.explore / fuelCounts.explore : 0
+  };
+
+  const avgIntensity = intensitySum / questions.length;
+  const dominantFuel = determineDominantFuel(fuelAverages);
+
+  // 6유형 매핑
+  let key;
+  if (avgIntensity < 55) {
+    // 잔잔함 영역
+    if (dominantFuel === 'calm')        key = 'quiet_walker';
+    else if (dominantFuel === 'relate') key = 'gentle_companion';
+    else                                 key = 'slow_observer';
+  } else {
+    // 치열함 영역
+    if (dominantFuel === 'calm')        key = 'deep_diver';
+    else if (dominantFuel === 'relate') key = 'bright_connector';
+    else                                 key = 'fiery_explorer';
+  }
+
+  return {
+    key,
+    archetype: archetypes[key],
+    fuels: fuelCounts,
+    fuelAverages,
+    intensity: avgIntensity,
+    dominantFuel
+  };
+}
+
+// dominantFuel 결정 — 연료별 강도 평균 비교, 동률 시 explore → relate → calm 우선
+function determineDominantFuel(fuelAverages) {
+  const maxAvg = Math.max(fuelAverages.calm, fuelAverages.relate, fuelAverages.explore);
+  const tied = Object.keys(fuelAverages).filter(f => fuelAverages[f] === maxAvg);
+
+  if (tied.length === 1) return tied[0];
+
+  const priority = ['explore', 'relate', 'calm'];
+  return priority.find(f => tied.includes(f));
+}
+
+// ============ 결과 렌더 ============
+function showResult() {
+  document.getElementById('quiz').classList.remove('active');
+  const resultEl = document.getElementById('result');
+  resultEl.classList.add('active');
+
+  const r = calculateResult();
+
+  // D1에 응답 저장 (비동기, 실패해도 결과 표시는 계속 진행)
+  saveResponse(r);
+
+  const a = r.archetype;
+
+  // 좌표 계산: x축은 연료(calm=좌, explore=우), y축은 강도(아래=잔잔, 위=치열)
+  // 연료 평균 차이는 최대 ±60 (85-25). 정규화 후 ±40% 폭으로 매핑.
+  const fuelDiff = (r.fuelAverages.explore - r.fuelAverages.calm) / 60;
+  const xPercent = 50 + Math.max(-1, Math.min(1, fuelDiff)) * 40; // 10~90%
+  const yPercent = 100 - r.intensity; // 강도 높을수록 위로
+
+  resultEl.innerHTML = `
+    <div class="result-header">
+      <div class="result-label">YOUR AMBITION SHAPE</div>
+      <span class="result-emoji">${a.emoji}</span>
+      <h2 class="result-title">${a.title}</h2>
+      <p class="result-tagline">${a.tagline}</p>
+    </div>
+
+    <div class="common-intro">
+      <p>큰 즐거움이 좋은 것도, 잔잔한 즐거움이 부족한 것도 아닙니다.</p>
+      <p>사람마다 즐거움이 차오르는 자리가 다를 뿐입니다.</p>
+      <p class="common-intro-emphasis">당신을 바꾸려는 진단이 아닙니다.<br>당신이 어떤 자리에서 즐거움을 찾는 사람인지 알아보고,<br>그 자리에 맞게 살 수 있도록 돕는 거울입니다.</p>
+    </div>
+
+    <div class="axis-viz">
+      <div class="axis-viz-label">당신의 즐거움 좌표</div>
+      <div class="axis-grid">
+        <span class="axis-label top">치열함</span>
+        <span class="axis-label bottom">잔잔함</span>
+        <span class="axis-label left">평온·혼자</span>
+        <span class="axis-label right">발견·새로움</span>
+        <div class="axis-dot" style="left: ${xPercent}%; top: ${yPercent}%"></div>
+      </div>
+    </div>
+
+    ${a.chapters ? renderNewResult(a) : renderLegacyResult(a)}
+
+    <div class="closing">
+      <p class="closing-text">
+        즐거움이 큰 사람과 없는 사람으로 나뉘지 않습니다.<br>
+        어떤 자리에서 차오르는지가 다를 뿐입니다.<br>
+        당신의 자리를 알아본 오늘이, 다음 한 걸음의 시작입니다.
+      </p>
+      <div class="action-buttons">
+        <button class="action-btn" onclick="restart()">다시 진단하기</button>
+        <button class="action-btn primary" onclick="shareResult()">결과 공유하기</button>
+      </div>
+    </div>
+  `;
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// 응답을 D1에 비동기 전송 (fire-and-forget)
+// 실패해도 사용자 화면 흐름은 막지 않는다 — 콘솔에 경고만 남김
+function saveResponse(r) {
+  fetch('/api/responses', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      diagnostic: 'joy',
+      version: 'v1',                  // About My Joy 초안 (2026-05-17)
+      answers: answers,               // 원본 응답 1~5 배열 (길이 36)
+      dominant_fuel: r.dominantFuel,
+      intensity_avg: r.intensity,
+      result_type: r.key
+    })
+  })
+  .then(res => {
+    if (!res.ok) console.warn('응답 저장 실패:', res.status);
+  })
+  .catch(err => {
+    console.warn('응답 저장 에러:', err);
+  });
+}
+
+function restart() {
+  currentQ = 0;
+  answers = new Array(questions.length).fill(null);
+  document.getElementById('result').classList.remove('active');
+  document.getElementById('intro').style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function shareResult() {
+  const r = calculateResult();
+  const text = `나의 즐거움은 "${r.archetype.title}" — ${r.archetype.tagline}\n\n어바웃 프리덤 · 일상의 깨달음`;
+  if (navigator.share) {
+    navigator.share({ title: '즐거움의 모양 진단', text });
+  } else {
+    navigator.clipboard.writeText(text);
+    alert('결과가 클립보드에 복사되었습니다');
+  }
+}
+
+// 새 결과지 렌더링 (chapters + closing 구조)
+function renderNewResult(a) {
+  const chapters = a.chapters.map((ch, i) => {
+    const num = String(i + 1).padStart(2, '0');
+    const paragraphs = ch.body.split('\n\n').map(p => `<p>${p.trim()}</p>`).join('');
+    return `
+      <div class="result-chapter">
+        <div class="result-chapter-mark">CHAPTER ${num}</div>
+        <h3 class="result-chapter-title">${ch.title}</h3>
+        <div class="result-chapter-body">${paragraphs}</div>
+      </div>
+    `;
+  }).join('');
+
+  const closingParas = a.closing.summary.split('\n\n').map(p => `<p>${p.trim()}</p>`).join('');
+
+  const recItems = a.closing.recommendations.map(rec => {
+    const typeLabel = rec.type === '책' ? 'BOOK' : 'FILM';
+    return `
+      <div class="rec-item">
+        <div class="rec-header">
+          <div class="rec-title-block">
+            <div class="rec-title">${rec.title}</div>
+            <div class="rec-author">${rec.author}</div>
+          </div>
+          <span class="rec-type">${typeLabel}</span>
+        </div>
+        <p class="rec-desc">${rec.desc}</p>
+      </div>
+    `;
+  }).join('');
+
+  return `
+    ${chapters}
+
+    <div class="result-closing-section">
+      <div class="result-closing-summary">${closingParas}</div>
+      <div class="rec-label">함께 읽으면 좋은 것들</div>
+      ${recItems}
+    </div>
+  `;
+}
+
+// v1 결과지 렌더링 (6유형 초안 공통)
+function renderLegacyResult(a) {
+  return `
+    <div class="result-section">
+      <div class="result-section-mark">01 · 당신의 자리</div>
+      <h3 class="result-section-title">이 즐거움은 어떻게 생겼나</h3>
+      <div class="result-section-body"><p>${a.shape}</p></div>
+    </div>
+
+    <div class="result-section">
+      <div class="result-section-mark">02 · 강점</div>
+      <h3 class="result-section-title">이 자리가 가진 힘</h3>
+      <div class="result-section-body"><p>${a.strength}</p></div>
+    </div>
+
+    <div class="result-section">
+      <div class="result-section-mark">03 · 그늘</div>
+      <h3 class="result-section-title">알아둘 점</h3>
+      <div class="result-section-body">
+        <div class="shadow-box"><p>${a.shadow}</p></div>
+      </div>
+    </div>
+
+    <div class="result-section">
+      <div class="next-step">
+        <div class="result-section-mark">04 · 다음 한 걸음</div>
+        <h3 class="result-section-title" style="color: var(--bg)">지금 해볼 수 있는 것</h3>
+        <div class="result-section-body"><p>${a.next}</p></div>
+      </div>
+    </div>
+
+    <div class="result-section">
+      <div class="result-section-mark">05 · 함께 읽으면 좋은 책</div>
+      <h3 class="result-section-title">당신을 위한 한 권</h3>
+      <div class="book-rec">
+        <div class="book-content">
+          <div class="book-title">${a.book.title}</div>
+          <div class="book-author">${a.book.author}</div>
+          <div class="book-reason">${a.book.reason}</div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+</script>
+
+</body>
+</html>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
