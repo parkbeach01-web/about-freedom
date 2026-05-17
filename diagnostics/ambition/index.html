@@ -479,6 +479,9 @@ body {
   letter-spacing: -0.005em;
   line-height: 1.35;
   text-align: center;
+  /* 한국어 어절 단위로 줄바꿈 — "매우 / 아니다"처럼 단어가 유지되도록 */
+  word-break: keep-all;
+  overflow-wrap: break-word;
   transition:
     background 0.4s var(--ease-out-expo),
     border-color 0.4s var(--ease-out-expo),
@@ -517,10 +520,14 @@ body {
 }
 
 @media (max-width: 540px) {
+  .scale-row {
+    gap: 6px;
+  }
   .scale-btn {
-    min-height: 56px;
-    padding: var(--space-2);
+    min-height: 72px;       /* 두 줄 들어갈 여유 */
+    padding: 10px 4px;
     font-size: 13px;
+    line-height: 1.3;
   }
   .scale-anchors { display: none; }
 }
