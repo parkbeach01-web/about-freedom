@@ -86,7 +86,8 @@ p { margin: 0; }
   border-bottom: 1px solid var(--line);
 }
 .header-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
-.brand { display: flex; align-items: baseline; gap: 10px; color: var(--ink); text-decoration: none; }
+.brand { display: flex; align-items: center; gap: 10px; color: var(--ink); text-decoration: none; }
+.brand-mark { width: 26px; height: 26px; color: var(--accent); flex: 0 0 auto; }
 .brand-name { font-weight: 700; font-size: 18px; letter-spacing: -0.03em; }
 .brand-sub { font-size: 13px; color: var(--muted); }
 .header-nav { display: flex; align-items: center; gap: 28px; font-size: 15px; font-weight: 500; }
@@ -306,6 +307,8 @@ input[type="radio"], input[type="checkbox"] { accent-color: var(--accent); width
 /* 하단 */
 .site-footer { padding: 48px 0 56px; font-size: 14px; color: var(--muted); border-top: 1px solid var(--line); }
 .footer-grid { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 24px; }
-.footer-brand { font-weight: 700; color: var(--ink); font-size: 16px; margin-bottom: 4px; letter-spacing: -0.02em; }
+.footer-brand { display: flex; align-items: center; gap: 8px; font-weight: 700; color: var(--ink); font-size: 16px; margin-bottom: 4px; letter-spacing: -0.02em; }
+
+.footer-brand .brand-mark { width: 22px; height: 22px; }
 .footer-info p + p { margin-top: 6px; }
 .site-footer a { color: var(--muted); }
