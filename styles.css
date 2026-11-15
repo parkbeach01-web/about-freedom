@@ -229,13 +229,13 @@ p { margin: 0; }
 .js .rings { display: grid; grid-template-columns: minmax(280px, 5fr) 6fr; gap: clamp(32px, 6vw, 88px); align-items: center; }
 .js .rings-visual { display: block; text-align: center; }
 .rings-svg { width: 100%; max-width: 440px; height: auto; display: block; margin: 0 auto; overflow: visible; }
-.ring path { fill: #1C4A39; stroke: rgba(244, 246, 243, .28); stroke-width: 1.2; transition: fill .35s ease, stroke .35s ease; }
-.ring text { fill: var(--on-dark-muted); font-size: 12px; font-weight: 700; text-anchor: middle; dominant-baseline: central; pointer-events: none; font-family: inherit; transition: fill .35s ease; }
-.ring { cursor: pointer; outline: none; }
-.ring.is-active path { fill: #4F8A72; stroke: var(--on-dark); stroke-width: 1.6; }
-.ring.is-active text { fill: var(--on-dark); }
-.ring:hover path { stroke: var(--on-dark); }
-.ring:focus-visible path { stroke: #fff; stroke-width: 2.5; }
+.orb circle { fill: #1C4A39; stroke: rgba(244, 246, 243, .28); stroke-width: 1.2; transition: fill .3s ease, stroke .3s ease, transform .3s ease; transform-box: fill-box; transform-origin: center; }
+.orb text { fill: var(--on-dark-muted); font-size: 14px; font-weight: 700; text-anchor: middle; dominant-baseline: central; pointer-events: none; font-family: inherit; transition: fill .3s ease; }
+.orb { cursor: pointer; outline: none; }
+.orb:hover circle { stroke: var(--on-dark); fill: #24543F; }
+.orb.is-active circle { fill: #4F8A72; stroke: var(--on-dark); stroke-width: 1.6; transform: scale(1.06); }
+.orb.is-active text { fill: #fff; }
+.orb:focus-visible circle { stroke: #fff; stroke-width: 2.5; }
 .rings-hint { margin-top: 18px; font-size: 14px; color: var(--on-dark-muted); }
 .js .rings .toc { display: block; background: none; border: 0; border-radius: 0; overflow: visible; }
 .js .rings .toc > li { display: none; padding: 0; background: none; }
@@ -255,7 +255,7 @@ p { margin: 0; }
   .rings-svg { max-width: 320px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .ring path, .ring text { transition: none; }
+  .orb circle, .orb text { transition: none; }
   .js .rings .toc > li.is-active { animation: none; }
 }
 

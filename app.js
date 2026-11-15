@@ -100,9 +100,9 @@ const ENDPOINT = "https://script.google.com/macros/s/AKfycbw7o7JQjhFea9Zp4bNUuRP
 })();
 
 
-// 일곱 가지 질문 나이테 (순서 없이 골라 보는 방식)
+// 일곱 가지 질문 (서로 다른 원 일곱 개, 순서 없이 골라 보기)
 (function () {
-  const rings = document.querySelectorAll(".ring");
+  const rings = document.querySelectorAll(".orb");
   const items = document.querySelectorAll("#toc > li");
   const nav = document.querySelector(".rings-nav");
   const cur = document.getElementById("rings-cur");
