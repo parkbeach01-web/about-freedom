@@ -76,7 +76,7 @@ const ENDPOINT = "https://script.google.com/macros/s/AKfycbw7o7JQjhFea9Zp4bNUuRP
         next.hidden = false;
         next.querySelector("a").focus();
       } else {
-        setStatus("신청서를 받았습니다. 확인 후 적어주신 연락처로 직접 연락드리겠습니다.", "ok");
+        setStatus("신청서를 받았습니다. 읽어 보고 적어주신 번호로 직접 문자 드리겠습니다.", "ok");
       }
     } catch (err) {
       setStatus("신청서를 보내지 못했습니다. 인터넷 연결을 확인하고 다시 보내주세요.", "error");
