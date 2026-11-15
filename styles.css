@@ -26,6 +26,7 @@
 *, *::before, *::after { box-sizing: border-box; }
 
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+section[id], [id="apply"] { scroll-margin-top: 72px; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
 body {
@@ -101,7 +102,7 @@ p { margin: 0; }
 }
 
 /* 첫 화면 */
-.hero { padding: clamp(48px, 7vw, 96px) 0 var(--section); }
+.hero { padding: clamp(48px, 7vw, 96px) 0 clamp(72px, 9vw, 112px); }
 .hero-grid { display: grid; grid-template-columns: 5fr 6fr; gap: clamp(32px, 5vw, 72px); align-items: center; }
 .hero-kicker { display: inline-block; font-size: 14px; font-weight: 600; color: var(--accent); background: #E6EEE9; padding: 6px 12px; border-radius: 999px; margin-bottom: 24px; }
 .hero h1 { font-size: clamp(38px, 5.4vw, 64px); }
@@ -142,33 +143,53 @@ p { margin: 0; }
   .letter-photo { position: static; max-width: 340px; }
 }
 
-/* 강의와 워크숍 현장 갤러리 */
+/* 강의와 워크숍 현장: 가로로 넘기는 캐러셀 */
 .scene { margin-top: clamp(64px, 8vw, 104px); }
-.scene-title { margin-bottom: 20px; }
-.gallery { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: clamp(110px, 13vw, 160px); grid-auto-flow: dense; gap: 12px; }
-.gallery figure { margin: 0; overflow: hidden; border-radius: var(--r-md); background: var(--surface); }
-.gallery img { width: 100%; height: 100%; object-fit: cover; }
-.g-wide { grid-column: span 2; grid-row: span 2; }
-.g-tall { grid-row: span 2; }
-.scene-caption { font-size: 14px; color: var(--muted); margin-top: 14px; }
-@media (max-width: 640px) {
-  .gallery { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 130px; }
-  .g-wide { grid-column: span 2; grid-row: span 2; }
+.scene-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 16px; }
+.car-nav { display: flex; gap: 8px; }
+.car-btn {
+  width: 40px; height: 40px; border-radius: 999px; border: 1px solid var(--line); background: var(--card);
+  color: var(--ink); display: inline-flex; align-items: center; justify-content: center; cursor: pointer; transition: border-color .15s ease;
 }
+.car-btn:hover { border-color: var(--ink); }
+.car-btn:disabled { opacity: .35; cursor: default; border-color: var(--line); }
+.carousel {
+  display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth;
+  scrollbar-width: none; -webkit-overflow-scrolling: touch; padding-bottom: 2px;
+}
+.carousel::-webkit-scrollbar { display: none; }
+.carousel figure { margin: 0; flex: 0 0 auto; height: clamp(180px, 20vw, 240px); scroll-snap-align: start; border-radius: var(--r-md); overflow: hidden; background: var(--surface); }
+.carousel img { height: 100%; width: auto; max-width: none; }
+.scene-caption { font-size: 14px; color: var(--muted); margin-top: 12px; }
+@media (prefers-reduced-motion: reduce) { .carousel { scroll-behavior: auto; } }
 
-/* 이런 생각을 자주 하신다면 */
+/* 이런 생각을 자주 하신다면: 말풍선 */
 .concerns { background: var(--surface); padding: var(--section) 0; }
-.concern-list { list-style: none; margin: 40px 0 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.concerns-grid { display: grid; grid-template-columns: 5fr 7fr; gap: clamp(32px, 6vw, 88px); align-items: center; }
+.concerns-head p { color: var(--muted); margin-top: 18px; max-width: 24em; }
+.concern-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
 .concern-list li {
+  text-wrap: pretty;
+  position: relative;
+  max-width: 34em;
   background: var(--card);
-  border-radius: var(--r-lg);
-  padding: 28px 30px;
-  font-size: clamp(17px, 1.8vw, 19px);
+  border-radius: 20px 20px 20px 6px;
+  padding: 18px 22px 18px 56px;
+  font-size: 17px;
   font-weight: 600;
   line-height: 1.6;
   letter-spacing: -0.02em;
+  box-shadow: 0 1px 0 rgba(26, 26, 24, .04);
 }
-@media (max-width: 720px) { .concern-list { grid-template-columns: 1fr; } }
+.concern-list li::before {
+  content: ""; position: absolute; left: 20px; top: 21px; width: 22px; height: 22px; border-radius: 999px;
+  background: #E6EEE9 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M7 15c-1.7 0-3-1.3-3-3s1.3-3 3-3c.3-2.8 2-4.5 4-5v2c-1.2.5-2 1.6-2 3 1.7 0 3 1.3 3 3s-1.3 3-3 3H7zm9 0c-1.7 0-3-1.3-3-3s1.3-3 3-3c.3-2.8 2-4.5 4-5v2c-1.2.5-2 1.6-2 3 1.7 0 3 1.3 3 3s-1.3 3-3 3h-2z' fill='%231F5641'/%3E%3C/svg%3E") center / 12px no-repeat;
+}
+.concern-list li:nth-child(even) { margin-left: clamp(0px, 6vw, 72px); border-radius: 20px 20px 6px 20px; }
+@media (max-width: 900px) {
+  .concerns-grid { grid-template-columns: 1fr; }
+  .concern-list li:nth-child(even) { margin-left: 24px; }
+}
 
 /* 관점 */
 .view { background: var(--surface); padding: 0 0 var(--section); }
@@ -215,12 +236,16 @@ p { margin: 0; }
 /* 프로그램 */
 .program { background: var(--surface); padding: var(--section) 0; }
 .section-lead { color: var(--muted); margin-top: 12px; }
-.price-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 44px; }
+.price-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 16px; }
 .price-item { background: var(--card); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 30px 28px; display: flex; flex-direction: column; }
 .price-item h3 { font-size: 28px; letter-spacing: -0.04em; }
-.price-for { font-weight: 600; margin-top: 12px; }
-.price-desc { color: var(--muted); margin-top: 6px; font-size: 16px; flex: 1; }
-.price { font-size: 26px; font-weight: 700; letter-spacing: -0.03em; margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--line); font-variant-numeric: tabular-nums; }
+.price-for { font-weight: 600; margin-top: 12px; text-wrap: balance; }
+.price-desc { color: var(--muted); margin-top: 6px; font-size: 16px; }
+.price-banner { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 18px; margin-top: 36px; padding: 22px 28px; background: var(--card); border: 1px solid var(--line); border-radius: var(--r-lg); }
+.price-main { font-size: 18px; font-weight: 600; }
+.price-main strong { font-size: 30px; font-weight: 700; letter-spacing: -0.03em; color: var(--accent); font-variant-numeric: tabular-nums; margin-left: 4px; }
+.price-sub { color: var(--muted); font-size: 15px; }
+.program-cta { margin-top: 40px; }
 .program-facts { margin: 40px 0 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
 .program-facts dt { font-size: 14px; font-weight: 600; color: var(--accent); }
 .program-facts dd { margin: 6px 0 0; color: var(--muted); font-size: 16px; }

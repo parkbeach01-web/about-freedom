@@ -76,15 +76,21 @@
       </div>
     </div>
     <div class="wrap scene">
-      <h3 class="scene-title">강의와 워크숍 현장</h3>
-      <div class="gallery">
-        <figure class="g-wide"><img src="images/workshop2.jpg" alt="워크숍에서 참여자 곁에 서서 이야기를 나누는 박규진 코치" width="1800" height="1350" loading="lazy"></figure>
-        <figure class="g-wide"><img src="images/lecture2.jpg" alt="커리어 비전을 주제로 강의하는 박규진 코치" width="1800" height="1350" loading="lazy"></figure>
-        <figure class="g-tall"><img src="images/lecture1.jpg" alt="강의 시작 전 노트북으로 자료를 준비하는 모습" width="768" height="1024" loading="lazy"></figure>
-        <figure class="g-wide"><img src="images/lecture5.jpg" alt="유학생 대상 취업 역량 강화 프로그램에서 강의하는 모습" width="1800" height="1350" loading="lazy"></figure>
-        <figure class="g-tall"><img src="images/lecture3.jpg" alt="교육 마무리 시간에 참여자들 앞에서 이야기하는 모습" width="1080" height="1440" loading="lazy"></figure>
-        <figure class="g-wide"><img src="images/workshop1.jpg" alt="워크숍 테이블에 참여자들과 함께 앉아 고민하는 모습" width="1800" height="1350" loading="lazy"></figure>
-        <figure class="g-wide"><img src="images/lecture4.jpg" alt="취업 및 채용 간담회를 진행하는 모습" width="1440" height="1081" loading="lazy"></figure>
+      <div class="scene-head">
+        <h3 class="scene-title">강의와 워크숍 현장</h3>
+        <div class="car-nav">
+          <button type="button" class="car-btn" data-dir="-1" aria-label="이전 사진"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <button type="button" class="car-btn" data-dir="1" aria-label="다음 사진"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </div>
+      </div>
+      <div class="carousel" id="carousel" tabindex="0" aria-label="강의와 워크숍 사진, 옆으로 넘겨 보기">
+        <figure><img src="images/workshop2.jpg" alt="워크숍에서 참여자 곁에 서서 이야기를 나누는 박규진 코치" width="1800" height="1350" loading="lazy"></figure>
+        <figure><img src="images/lecture2.jpg" alt="커리어 비전을 주제로 강의하는 박규진 코치" width="1800" height="1350" loading="lazy"></figure>
+        <figure><img src="images/lecture1.jpg" alt="강의 시작 전 노트북으로 자료를 준비하는 모습" width="768" height="1024" loading="lazy"></figure>
+        <figure><img src="images/lecture5.jpg" alt="유학생 대상 취업 역량 강화 프로그램에서 강의하는 모습" width="1800" height="1350" loading="lazy"></figure>
+        <figure><img src="images/lecture3.jpg" alt="교육 마무리 시간에 참여자들 앞에서 이야기하는 모습" width="1080" height="1440" loading="lazy"></figure>
+        <figure><img src="images/workshop1.jpg" alt="워크숍 테이블에 참여자들과 함께 앉아 고민하는 모습" width="1800" height="1350" loading="lazy"></figure>
+        <figure><img src="images/lecture4.jpg" alt="취업 및 채용 간담회를 진행하는 모습" width="1440" height="1081" loading="lazy"></figure>
       </div>
       <p class="scene-caption">참여자의 얼굴과 개인정보는 가렸습니다.</p>
     </div>
@@ -92,13 +98,16 @@
 
   <!-- 이런 고민이라면 -->
   <section class="concerns" aria-labelledby="concerns-title">
-    <div class="wrap">
-      <h2 id="concerns-title">이런 생각을 자주 하신다면</h2>
+    <div class="wrap concerns-grid">
+      <div class="concerns-head">
+        <h2 id="concerns-title">이런 생각을<br>자주 하신다면</h2>
+        <p>코칭에서 가장 자주 듣는 이야기들입니다. 혼자 오래 붙잡고 있던 생각이라면, 말로 꺼내는 것부터 시작합니다.</p>
+      </div>
       <ul class="concern-list">
-        <li>지금 일이 싫지는 않은데, 계속할 일인지는 잘 모르겠습니다.</li>
-        <li>이직은 마음먹으면 할 수 있을 것 같은데, 나에게 맞는 일이나 회사를 찾는 방법을 모르겠습니다.</li>
-        <li>내가 무엇을 잘하고 무엇을 원하는지, 말로 정리가 되지 않습니다.</li>
-        <li>여러 가지를 해봤지만, 여전히 확신이 서지 않습니다.</li>
+        <li>지금 일이 싫지는 않은데, 계속할 일인지는 잘 모르겠어요.</li>
+        <li>이직은 마음먹으면 할 수 있을 것 같은데, 나에게 맞는 일이나 회사를 찾는 방법을 모르겠어요.</li>
+        <li>내가 무엇을 잘하고 무엇을 원하는지, 말로 정리가 안 돼요.</li>
+        <li>여러 가지를 해봤지만, 여전히 확신이 서지 않아요.</li>
       </ul>
     </div>
   </section>
@@ -179,32 +188,34 @@
   <section class="program" id="program" aria-labelledby="program-title">
     <div class="wrap">
       <h2 id="program-title">프로그램</h2>
-      <p class="section-lead">어떤 프로그램이 맞을지는 첫 통화에서 함께 정합니다.</p>
+      <p class="section-lead">몇 회로 진행할지는 무료 초기 상담 통화(10~15분)에서 지금의 고민을 듣고 함께 정합니다.</p>
+      <div class="price-banner">
+        <p class="price-main">회당 <strong>70,000원</strong></p>
+        <p class="price-sub">90분, 부가세 포함. 오프라인과 온라인 모두 같습니다.</p>
+      </div>
       <div class="price-list">
         <article class="price-item">
           <h3>1회</h3>
           <p class="price-for">지금 가장 큰 고민 하나를 정리하고 싶을 때</p>
           <p class="price-desc">고민을 구조화하고 다음 한 걸음을 정합니다.</p>
-          <p class="price">70,000원</p>
         </article>
         <article class="price-item">
           <h3>3회</h3>
           <p class="price-for">방향을 잡고 싶을 때</p>
           <p class="price-desc">일곱 가지 질문을 세 번의 만남에 나눠 다룹니다.</p>
-          <p class="price">210,000원</p>
         </article>
         <article class="price-item">
           <h3>5회</h3>
           <p class="price-for">깊이 정리하고 설계하고 싶을 때</p>
           <p class="price-desc">일곱 가지 질문을 충분히 다루고, 마지막 회차에 정리본을 함께 완성합니다.</p>
-          <p class="price">350,000원</p>
         </article>
       </div>
       <dl class="program-facts">
+        <div><dt>초기 상담</dt><dd>10~15분 통화, 무료. 맞는 회차를 함께 정합니다.</dd></div>
         <div><dt>시간</dt><dd>회당 90분, 1~2주 간격</dd></div>
         <div><dt>장소</dt><dd>서울의 조용한 작은 공간에서 만납니다. 오기 어려우시면 Google Meet로 진행합니다.</dd></div>
-        <div><dt>비용</dt><dd>회당 70,000원, 부가세 포함. 온라인도 같습니다.</dd></div>
       </dl>
+      <div class="program-cta"><a class="btn" href="#apply">코칭 신청하기</a></div>
     </div>
   </section>
 

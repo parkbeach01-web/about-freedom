@@ -75,3 +75,25 @@ const ENDPOINT = "https://script.google.com/macros/s/AKfycbw7o7JQjhFea9Zp4bNUuRP
     }
   });
 })();
+
+// 강의와 워크숍 사진 캐러셀
+(function () {
+  const track = document.getElementById("carousel");
+  if (!track) return;
+  const buttons = document.querySelectorAll(".car-btn");
+  function update() {
+    const max = track.scrollWidth - track.clientWidth - 2;
+    buttons.forEach(b => { b.disabled = b.dataset.dir === "-1" ? track.scrollLeft <= 2 : track.scrollLeft >= max; });
+  }
+  buttons.forEach(b => b.addEventListener("click", () => {
+    track.scrollBy({ left: Number(b.dataset.dir) * track.clientWidth * 0.8 });
+  }));
+  track.addEventListener("scroll", update, { passive: true });
+  window.addEventListener("resize", update);
+  track.addEventListener("keydown", e => {
+    if (e.key === "ArrowRight") track.scrollBy({ left: 300 });
+    if (e.key === "ArrowLeft") track.scrollBy({ left: -300 });
+  });
+  update();
+  window.addEventListener("load", update);
+})();
