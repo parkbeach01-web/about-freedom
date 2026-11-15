@@ -1,6 +1,8 @@
 document.documentElement.classList.add("js");
 // 신청서 전송
 // Google Apps Script 웹앱 주소를 배포한 뒤 아래 ENDPOINT에 넣습니다. (apps-script/README.md 참고)
+// 구글 캘린더 예약 페이지 주소. 넣으면 신청 완료 화면에 통화 예약 버튼이 나옵니다.
+const BOOKING_URL = "";
 const ENDPOINT = "https://script.google.com/macros/s/AKfycbw7o7JQjhFea9Zp4bNUuRPlT3pdbz9k34oN9cJsy3rhwRkS1bmRV5avsNGuZnQz2myz5w/exec";
 
 (function () {
@@ -67,7 +69,15 @@ const ENDPOINT = "https://script.google.com/macros/s/AKfycbw7o7JQjhFea9Zp4bNUuRP
     try {
       await fetch(ENDPOINT, { method: "POST", mode: "no-cors", body: data });
       form.reset();
-      setStatus("신청서를 받았습니다. 확인 후 적어주신 연락처로 직접 연락드리겠습니다.", "ok");
+      if (BOOKING_URL) {
+        setStatus("신청서를 받았습니다. 이어서 첫 통화(10~15분) 시간을 골라주세요.", "ok");
+        const next = document.getElementById("booking-next");
+        next.querySelector("a").href = BOOKING_URL;
+        next.hidden = false;
+        next.querySelector("a").focus();
+      } else {
+        setStatus("신청서를 받았습니다. 확인 후 적어주신 연락처로 직접 연락드리겠습니다.", "ok");
+      }
     } catch (err) {
       setStatus("신청서를 보내지 못했습니다. 인터넷 연결을 확인하고 다시 보내주세요.", "error");
     } finally {

@@ -387,3 +387,6 @@ input[type="radio"], input[type="checkbox"] { accent-color: var(--accent); width
 /* 섹션 라벨 */
 .eyebrow { font-size: 15px; font-weight: 700; color: var(--accent); margin: 0 0 14px; letter-spacing: -0.01em; }
 .contents .eyebrow { color: var(--on-dark-muted); }
+.booking-next { margin-top: 12px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.booking-next p { font-size: 14px; color: var(--muted); }
+.booking-next[hidden] { display: none; }
