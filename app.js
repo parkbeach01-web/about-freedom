@@ -100,31 +100,95 @@ const ENDPOINT = "https://script.google.com/macros/s/AKfycbw7o7JQjhFea9Zp4bNUuRP
 })();
 
 
-// 일곱 가지 질문 (서로 다른 원 일곱 개, 순서 없이 골라 보기)
+// 일곱 가지 질문: 서로 이어진 원들이 떠다니고, 누른 원이 커짐
 (function () {
-  const rings = document.querySelectorAll(".orb");
+  const svg = document.querySelector(".rings-svg");
+  const orbs = Array.from(document.querySelectorAll(".orb"));
   const items = document.querySelectorAll("#toc > li");
   const nav = document.querySelector(".rings-nav");
   const cur = document.getElementById("rings-cur");
-  if (!rings.length || items.length !== 7) return;
+  if (!svg || orbs.length !== 7 || items.length !== 7) return;
   nav.hidden = false;
+  const NS = "http://www.w3.org/2000/svg";
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const nodes = orbs.map((g, i) => {
+    const c = g.querySelector("circle"), t = g.querySelector("text");
+    const bx = +c.getAttribute("cx"), by = +c.getAttribute("cy"), br = +c.getAttribute("r");
+    return { g, c, t, bx, by, br, x: bx, y: by, vx: 0, vy: 0, r: br, tr: br,
+      p1: i * 1.7, p2: i * 2.3 + 1, s1: 0.00045 + i * 0.00004, s2: 0.00038 + i * 0.00005 };
+  });
+  const edges = [[0,1],[0,3],[0,4],[1,2],[1,3],[2,3],[2,6],[3,4],[3,5],[5,6],[2,5]];
+  const linkG = svg.querySelector(".links");
+  const lines = edges.map(() => { const l = document.createElementNS(NS, "line"); linkG.appendChild(l); return l; });
   let step = 1;
+
   function show(n) {
     step = ((n - 1 + 7) % 7) + 1;
-    rings.forEach((g) => {
-      const on = Number(g.dataset.step) === step;
-      g.classList.toggle("is-active", on);
-      g.setAttribute("aria-pressed", on ? "true" : "false");
-      if (on) cur.textContent = g.querySelector("text").textContent;
+    nodes.forEach((d, i) => {
+      const on = i + 1 === step;
+      d.g.classList.toggle("is-active", on);
+      d.g.setAttribute("aria-pressed", on ? "true" : "false");
+      d.tr = on ? d.br * 1.32 : d.br * 0.88;
+      if (on) cur.textContent = d.t.textContent;
     });
+    lines.forEach((l, k) => l.classList.toggle("is-on", edges[k].includes(step - 1)));
     items.forEach((li, i) => li.classList.toggle("is-active", i + 1 === step));
+    if (reduce) { nodes.forEach((d) => { d.r = d.tr; }); settle(); draw(); }
   }
-  rings.forEach((g) => {
-    g.addEventListener("click", () => show(Number(g.dataset.step)));
-    g.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); show(Number(g.dataset.step)); }
+
+  function draw() {
+    nodes.forEach((d) => {
+      d.c.setAttribute("cx", d.x.toFixed(1)); d.c.setAttribute("cy", d.y.toFixed(1)); d.c.setAttribute("r", d.r.toFixed(1));
+      d.t.setAttribute("x", d.x.toFixed(1)); d.t.setAttribute("y", d.y.toFixed(1));
     });
+    lines.forEach((l, k) => {
+      const a = nodes[edges[k][0]], b = nodes[edges[k][1]];
+      l.setAttribute("x1", a.x.toFixed(1)); l.setAttribute("y1", a.y.toFixed(1));
+      l.setAttribute("x2", b.x.toFixed(1)); l.setAttribute("y2", b.y.toFixed(1));
+    });
+  }
+
+  function physics(time, k) {
+    nodes.forEach((d) => {
+      d.r += (d.tr - d.r) * 0.12 * k;
+      const fx = d.bx + (reduce ? 0 : Math.sin(time * d.s1 + d.p1) * 7);
+      const fy = d.by + (reduce ? 0 : Math.cos(time * d.s2 + d.p2) * 7);
+      d.vx += (fx - d.x) * 0.02 * k; d.vy += (fy - d.y) * 0.02 * k;
+    });
+    for (let i = 0; i < nodes.length; i++) for (let j = i + 1; j < nodes.length; j++) {
+      const a = nodes[i], b = nodes[j];
+      const dx = b.x - a.x, dy = b.y - a.y, dist = Math.hypot(dx, dy) || 1, min = a.r + b.r + 10;
+      if (dist < min) {
+        const push = (min - dist) * 0.08 * k, ux = dx / dist, uy = dy / dist;
+        a.vx -= ux * push; a.vy -= uy * push; b.vx += ux * push; b.vy += uy * push;
+      }
+    }
+    nodes.forEach((d) => {
+      d.vx *= 0.82; d.vy *= 0.82; d.x += d.vx * k; d.y += d.vy * k;
+      d.x = Math.min(400 - d.r * 0.6, Math.max(d.r * 0.6, d.x));
+      d.y = Math.min(400 - d.r * 0.6, Math.max(d.r * 0.6, d.y));
+    });
+  }
+  function settle() { for (let i = 0; i < 240; i++) physics(0, 1); }
+
+  let visible = false, last = 0, raf = 0;
+  function loop(t) {
+    const k = last ? Math.min(2, (t - last) / 16.7) : 1; last = t;
+    physics(t, k); draw();
+    raf = visible ? requestAnimationFrame(loop) : 0;
+  }
+  if (!reduce && "IntersectionObserver" in window) {
+    new IntersectionObserver((es) => {
+      visible = es[0].isIntersecting;
+      if (visible && !raf) { last = 0; raf = requestAnimationFrame(loop); }
+    }).observe(svg);
+  }
+
+  orbs.forEach((g, i) => {
+    g.addEventListener("click", () => show(i + 1));
+    g.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); show(i + 1); } });
   });
   nav.querySelectorAll(".rings-btn").forEach((b) => b.addEventListener("click", () => show(step + Number(b.dataset.dir))));
   show(1);
+  if (reduce) { settle(); draw(); }
 })();

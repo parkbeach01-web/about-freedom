@@ -88,7 +88,7 @@ p { margin: 0; }
 }
 .header-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
 .brand { display: flex; align-items: center; gap: 10px; color: var(--ink); text-decoration: none; }
-.brand-mark { width: 26px; height: 26px; color: var(--accent); flex: 0 0 auto; }
+.brand-mark { width: 30px; height: 30px; color: var(--accent); flex: 0 0 auto; }
 .brand-name { font-weight: 700; font-size: 18px; letter-spacing: -0.03em; }
 .brand-sub { font-size: 13px; color: var(--muted); }
 .header-nav { display: flex; align-items: center; gap: 28px; font-size: 15px; font-weight: 500; }
@@ -229,11 +229,13 @@ p { margin: 0; }
 .js .rings { display: grid; grid-template-columns: minmax(280px, 5fr) 6fr; gap: clamp(32px, 6vw, 88px); align-items: center; }
 .js .rings-visual { display: block; text-align: center; }
 .rings-svg { width: 100%; max-width: 440px; height: auto; display: block; margin: 0 auto; overflow: visible; }
-.orb circle { fill: #1C4A39; stroke: rgba(244, 246, 243, .28); stroke-width: 1.2; transition: fill .3s ease, stroke .3s ease, transform .3s ease; transform-box: fill-box; transform-origin: center; }
-.orb text { fill: var(--on-dark-muted); font-size: 14px; font-weight: 700; text-anchor: middle; dominant-baseline: central; pointer-events: none; font-family: inherit; transition: fill .3s ease; }
+.orb circle { fill: #1C4A39; stroke: rgba(244, 246, 243, .28); stroke-width: 1.2; transition: fill .3s ease, stroke .3s ease; }
+.links line { stroke: rgba(244, 246, 243, .18); stroke-width: 1; transition: stroke .3s ease; }
+.links line.is-on { stroke: rgba(244, 246, 243, .55); }
+.orb text { fill: var(--on-dark-muted); font-size: 14px; user-select: none; font-weight: 700; text-anchor: middle; dominant-baseline: central; pointer-events: none; font-family: inherit; transition: fill .3s ease; }
 .orb { cursor: pointer; outline: none; }
 .orb:hover circle { stroke: var(--on-dark); fill: #24543F; }
-.orb.is-active circle { fill: #4F8A72; stroke: var(--on-dark); stroke-width: 1.6; transform: scale(1.06); }
+.orb.is-active circle { fill: #4F8A72; stroke: var(--on-dark); stroke-width: 1.6; }
 .orb.is-active text { fill: #fff; }
 .orb:focus-visible circle { stroke: #fff; stroke-width: 2.5; }
 .rings-hint { margin-top: 18px; font-size: 14px; color: var(--on-dark-muted); }
