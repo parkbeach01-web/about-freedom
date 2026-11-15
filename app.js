@@ -100,7 +100,7 @@ const ENDPOINT = "https://script.google.com/macros/s/AKfycbw7o7JQjhFea9Zp4bNUuRP
 })();
 
 
-// 일곱 가지 질문 나이테
+// 일곱 가지 질문 나이테 (순서 없이 골라 보는 방식)
 (function () {
   const rings = document.querySelectorAll(".ring");
   const items = document.querySelectorAll("#toc > li");
@@ -110,17 +110,14 @@ const ENDPOINT = "https://script.google.com/macros/s/AKfycbw7o7JQjhFea9Zp4bNUuRP
   nav.hidden = false;
   let step = 1;
   function show(n) {
-    step = Math.min(7, Math.max(1, n));
+    step = ((n - 1 + 7) % 7) + 1;
     rings.forEach((g) => {
-      const i = Number(g.dataset.step);
-      g.classList.toggle("is-active", i === step);
-      g.classList.toggle("is-grown", i < step);
-      g.setAttribute("aria-pressed", i === step ? "true" : "false");
+      const on = Number(g.dataset.step) === step;
+      g.classList.toggle("is-active", on);
+      g.setAttribute("aria-pressed", on ? "true" : "false");
+      if (on) cur.textContent = g.querySelector("text").textContent;
     });
     items.forEach((li, i) => li.classList.toggle("is-active", i + 1 === step));
-    cur.textContent = step;
-    nav.querySelector('[data-dir="-1"]').disabled = step === 1;
-    nav.querySelector('[data-dir="1"]').disabled = step === 7;
   }
   rings.forEach((g) => {
     g.addEventListener("click", () => show(Number(g.dataset.step)));

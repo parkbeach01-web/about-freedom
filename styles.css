@@ -230,11 +230,10 @@ p { margin: 0; }
 .js .rings-visual { display: block; text-align: center; }
 .rings-svg { width: 100%; max-width: 440px; height: auto; display: block; margin: 0 auto; overflow: visible; }
 .ring path { fill: #1C4A39; stroke: rgba(244, 246, 243, .28); stroke-width: 1.2; transition: fill .35s ease, stroke .35s ease; }
-.ring text { fill: var(--on-dark-muted); font-size: 13px; font-weight: 700; text-anchor: middle; dominant-baseline: central; pointer-events: none; font-family: inherit; transition: fill .35s ease; }
+.ring text { fill: var(--on-dark-muted); font-size: 12px; font-weight: 700; text-anchor: middle; dominant-baseline: central; pointer-events: none; font-family: inherit; transition: fill .35s ease; }
 .ring { cursor: pointer; outline: none; }
-.ring.is-grown path { fill: #2B6650; }
 .ring.is-active path { fill: #4F8A72; stroke: var(--on-dark); stroke-width: 1.6; }
-.ring.is-active text, .ring.is-grown text { fill: var(--on-dark); }
+.ring.is-active text { fill: var(--on-dark); }
 .ring:hover path { stroke: var(--on-dark); }
 .ring:focus-visible path { stroke: #fff; stroke-width: 2.5; }
 .rings-hint { margin-top: 18px; font-size: 14px; color: var(--on-dark-muted); }
@@ -245,7 +244,7 @@ p { margin: 0; }
 .js .rings .toc-num { font-size: 17px; }
 .js .rings .toc-desc { font-size: 17px; margin-top: 18px; }
 .rings-nav { display: flex; align-items: center; gap: 14px; margin-top: 36px; }
-.rings-count { font-size: 15px; color: var(--on-dark-muted); font-variant-numeric: tabular-nums; min-width: 3.5em; text-align: center; }
+.rings-count { font-size: 15px; font-weight: 600; color: var(--on-dark); min-width: 5em; text-align: center; }
 .rings-count b { color: var(--on-dark); }
 .rings-btn { width: 44px; height: 44px; border-radius: 999px; border: 1px solid rgba(244, 246, 243, .3); background: transparent; color: var(--on-dark); font-size: 18px; cursor: pointer; font-family: inherit; }
 .rings-btn:hover { background: rgba(244, 246, 243, .1); }
