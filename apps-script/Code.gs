@@ -55,3 +55,9 @@ function clean_(v) {
 function ok_() {
   return ContentService.createTextOutput("ok");
 }
+
+// 처음 한 번 실행: 시트 머리글을 만들고 권한(시트, 메일)을 허용받습니다.
+function setup() {
+  getSheet_();
+  MailApp.getRemainingDailyQuota();
+}

@@ -1,6 +1,6 @@
 // 신청서 전송
 // Google Apps Script 웹앱 주소를 배포한 뒤 아래 ENDPOINT에 넣습니다. (apps-script/README.md 참고)
-const ENDPOINT = "";
+const ENDPOINT = "https://script.google.com/macros/s/AKfycbw7o7JQjhFea9Zp4bNUuRPlT3pdbz9k34oN9cJsy3rhwRkS1bmRV5avsNGuZnQz2myz5w/exec";
 
 (function () {
   const form = document.getElementById("apply-form");

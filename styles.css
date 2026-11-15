@@ -141,12 +141,19 @@ p { margin: 0; }
   .letter-photo { position: static; max-width: 340px; }
 }
 
-/* 워크숍 현장 사진 */
-.field-photos { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: clamp(56px, 7vw, 88px); }
-.field-photos figure { margin: 0; }
-.field-photos img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--r-lg); }
-.field-caption { grid-column: 1 / -1; font-size: 14px; color: var(--muted); }
-@media (max-width: 640px) { .field-photos { grid-template-columns: 1fr; } }
+/* 강의와 워크숍 현장 갤러리 */
+.scene { margin-top: clamp(64px, 8vw, 104px); }
+.scene-title { margin-bottom: 20px; }
+.gallery { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: clamp(110px, 13vw, 160px); grid-auto-flow: dense; gap: 12px; }
+.gallery figure { margin: 0; overflow: hidden; border-radius: var(--r-md); background: var(--surface); }
+.gallery img { width: 100%; height: 100%; object-fit: cover; }
+.g-wide { grid-column: span 2; grid-row: span 2; }
+.g-tall { grid-row: span 2; }
+.scene-caption { font-size: 14px; color: var(--muted); margin-top: 14px; }
+@media (max-width: 640px) {
+  .gallery { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 130px; }
+  .g-wide { grid-column: span 2; grid-row: span 2; }
+}
 
 /* 이런 생각을 자주 하신다면 */
 .concerns { background: var(--surface); padding: var(--section) 0; }
