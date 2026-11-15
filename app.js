@@ -1,3 +1,4 @@
+document.documentElement.classList.add("js");
 // 신청서 전송
 // Google Apps Script 웹앱 주소를 배포한 뒤 아래 ENDPOINT에 넣습니다. (apps-script/README.md 참고)
 const ENDPOINT = "https://script.google.com/macros/s/AKfycbw7o7JQjhFea9Zp4bNUuRPlT3pdbz9k34oN9cJsy3rhwRkS1bmRV5avsNGuZnQz2myz5w/exec";
@@ -96,4 +97,37 @@ const ENDPOINT = "https://script.google.com/macros/s/AKfycbw7o7JQjhFea9Zp4bNUuRP
   });
   update();
   window.addEventListener("load", update);
+})();
+
+
+// 일곱 가지 질문 나이테
+(function () {
+  const rings = document.querySelectorAll(".ring");
+  const items = document.querySelectorAll("#toc > li");
+  const nav = document.querySelector(".rings-nav");
+  const cur = document.getElementById("rings-cur");
+  if (!rings.length || items.length !== 7) return;
+  nav.hidden = false;
+  let step = 1;
+  function show(n) {
+    step = Math.min(7, Math.max(1, n));
+    rings.forEach((g) => {
+      const i = Number(g.dataset.step);
+      g.classList.toggle("is-active", i === step);
+      g.classList.toggle("is-grown", i < step);
+      g.setAttribute("aria-pressed", i === step ? "true" : "false");
+    });
+    items.forEach((li, i) => li.classList.toggle("is-active", i + 1 === step));
+    cur.textContent = step;
+    nav.querySelector('[data-dir="-1"]').disabled = step === 1;
+    nav.querySelector('[data-dir="1"]').disabled = step === 7;
+  }
+  rings.forEach((g) => {
+    g.addEventListener("click", () => show(Number(g.dataset.step)));
+    g.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); show(Number(g.dataset.step)); }
+    });
+  });
+  nav.querySelectorAll(".rings-btn").forEach((b) => b.addEventListener("click", () => show(step + Number(b.dataset.dir))));
+  show(1);
 })();
