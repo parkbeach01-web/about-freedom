@@ -297,20 +297,22 @@ p { margin: 0; }
 
 /* 진행 방법 */
 .process { padding: var(--section) 0; }
-.process-grid { display: grid; grid-template-columns: 7fr 5fr; gap: clamp(32px, 6vw, 80px); align-items: start; }
-.steps { list-style: none; margin: 40px 0 0; padding: 0; counter-reset: step; }
-.steps li { counter-increment: step; display: grid; grid-template-columns: 48px 1fr; column-gap: 8px; padding: 18px 0; border-top: 1px solid var(--line); }
-.steps li:last-child { border-bottom: 1px solid var(--line); }
-.steps li::before { content: counter(step, decimal-leading-zero); grid-row: span 2; font-size: 15px; font-weight: 700; color: var(--accent); line-height: 1.7; font-variant-numeric: tabular-nums; }
-.steps strong { font-weight: 700; }
-.steps span { color: var(--muted); font-size: 16px; }
-.policy { background: var(--surface); padding: 32px; border-radius: var(--r-lg); margin-top: 8px; }
-.policy h3 { font-size: 17px; }
-.policy h3 + p { margin-top: 8px; }
-.policy p { color: var(--muted); font-size: 15px; }
-.policy p + p { margin-top: 8px; }
-.policy p + h3 { margin-top: 24px; }
-@media (max-width: 900px) { .process-grid { grid-template-columns: 1fr; } }
+.flow { list-style: none; margin: 48px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; position: relative; }
+.flow::before { content: ""; position: absolute; top: 20px; left: 20px; right: calc(25% - 25px); height: 1px; background: var(--line); }
+.flow li { position: relative; display: flex; flex-direction: column; gap: 8px; padding-right: 8px; }
+.flow-num { width: 40px; height: 40px; border-radius: 999px; background: var(--accent); color: #fff; font-weight: 700; font-size: 16px; display: grid; place-items: center; margin-bottom: 12px; box-shadow: 0 0 0 6px var(--bg); }
+.flow strong { font-size: 18px; font-weight: 700; letter-spacing: -0.02em; }
+.flow-desc { color: var(--muted); font-size: 15px; line-height: 1.7; }
+.policy { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(20px, 4vw, 48px); background: var(--surface); padding: 28px 32px; border-radius: var(--r-lg); margin-top: 48px; }
+.policy h3 { font-size: 16px; }
+.policy p { color: var(--muted); font-size: 15px; margin-top: 8px; }
+@media (max-width: 860px) {
+  .flow { grid-template-columns: 1fr; gap: 0; }
+  .flow::before { top: 20px; bottom: 90px; left: 20px; right: auto; width: 1px; height: auto; }
+  .flow li { display: grid; grid-template-columns: 40px 1fr; column-gap: 16px; row-gap: 4px; padding: 0 0 24px; }
+  .flow-num { grid-row: span 2; margin-bottom: 0; }
+  .policy { grid-template-columns: 1fr; padding: 24px; }
+}
 
 /* 자주 묻는 질문 */
 .faq { padding: 0 0 var(--section); }
