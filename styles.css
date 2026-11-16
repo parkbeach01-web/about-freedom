@@ -117,7 +117,7 @@ p { margin: 0; }
 }
 
 /* 코치 소개 */
-.letter { padding: var(--section) 0; border-top: 1px solid var(--line); }
+.letter { padding: var(--section) 0; }
 .letter-grid { display: grid; grid-template-columns: 4fr 7fr; gap: clamp(32px, 6vw, 96px); align-items: start; }
 .letter-photo { margin: 0; position: sticky; top: 96px; }
 .letter-photo img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: center 20%; border-radius: var(--r-lg); background: var(--surface); }
@@ -197,9 +197,10 @@ p { margin: 0; }
 
 /* 관점 */
 .view { background: var(--surface); padding: var(--section) 0; }
-.view-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 6vw, 80px); align-items: center; }
+.view-grid { display: grid; grid-template-columns: 5fr 7fr; gap: clamp(32px, 6vw, 88px); align-items: start; }
 .view-illust { width: min(360px, 85%); height: auto; margin-top: 40px; }
-.view-body p { max-width: 32em; color: var(--muted); font-size: 18px; }
+.view-body { padding-top: 34px; }
+.view-body p { max-width: 34em; color: var(--muted); font-size: 17px; line-height: 1.8; }
 .view-body p + p { margin-top: 1em; }
 @media (max-width: 900px) { .view-grid { grid-template-columns: 1fr; } }
 
@@ -316,7 +317,7 @@ p { margin: 0; }
 }
 
 /* 자주 묻는 질문 */
-.faq { padding: 0 0 var(--section); }
+.faq { padding: var(--section) 0; border-top: 1px solid var(--line); }
 .faq-wrap { display: grid; grid-template-columns: 4fr 8fr; gap: clamp(28px, 6vw, 80px); }
 .faq-list details { border-top: 1px solid var(--line); }
 .faq-list details:last-child { border-bottom: 1px solid var(--line); }
@@ -393,7 +394,7 @@ input[type="radio"], input[type="checkbox"] { accent-color: var(--accent); width
 .situations h3 { font-size: 20px; margin-bottom: 20px; }
 .situation-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
 .situation-list li { background: var(--bg); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 22px 22px 24px; display: flex; flex-direction: column; gap: 8px; }
-.situation-list strong { font-size: 17px; letter-spacing: -0.02em; }
+.situation-list strong { font-size: 16px; letter-spacing: -0.02em; }
 .situation-list span { color: var(--muted); font-size: 15px; line-height: 1.65; }
 @media (max-width: 1000px) { .situation-list { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 600px) { .situation-list { grid-template-columns: 1fr; } }
@@ -401,7 +402,8 @@ input[type="radio"], input[type="checkbox"] { accent-color: var(--accent); width
 /* 비전 */
 .vision { padding: var(--section) 0; border-top: 1px solid var(--line); }
 .vision-grid { display: grid; grid-template-columns: 5fr 7fr; gap: clamp(32px, 6vw, 88px); align-items: start; }
-.vision-body p { color: var(--muted); font-size: 18px; max-width: 34em; }
+.vision-body { padding-top: 34px; }
+.vision-body p { color: var(--muted); font-size: 17px; line-height: 1.8; max-width: 34em; }
 .vision-body p + p { margin-top: 1em; }
 .vision-body .vision-ambition { color: var(--ink); font-weight: 700; font-size: 20px; letter-spacing: -0.02em; margin-top: 1.4em; }
 .roadmap { list-style: none; margin: 32px 0 0; padding: 0; border-top: 1px solid var(--line); }
@@ -424,7 +426,13 @@ input[type="radio"], input[type="checkbox"] { accent-color: var(--accent); width
 .method-steps p { color: var(--muted); font-size: 15px; margin-top: 10px; line-height: 1.7; }
 @media (max-width: 860px) { .method-steps { grid-template-columns: 1fr; } }
 .vision-mark { margin: 48px 0 0; max-width: 300px; }
-.vision-mark svg { width: 96px; height: 96px; color: var(--accent); display: block; }
+.vision-mark svg { width: 72px; height: 72px; color: var(--accent); display: block; }
 .vision-mark figcaption { margin-top: 18px; color: var(--muted); font-size: 15px; line-height: 1.7; }
 @media (max-width: 860px) { .vision-mark { margin-top: 28px; } .vision-mark svg { width: 64px; height: 64px; } }
 .view-illust.is-tall { width: auto; height: clamp(240px, 26vw, 340px); }
+@media (max-width: 860px) {
+  .view-grid { grid-template-columns: 1fr; }
+  .view-body, .vision-body { padding-top: 0; }
+  .view-illust { display: none; }
+  .vision-mark { display: none; }
+}
