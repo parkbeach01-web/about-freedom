@@ -427,3 +427,4 @@ input[type="radio"], input[type="checkbox"] { accent-color: var(--accent); width
 .vision-mark svg { width: 96px; height: 96px; color: var(--accent); display: block; }
 .vision-mark figcaption { margin-top: 18px; color: var(--muted); font-size: 15px; line-height: 1.7; }
 @media (max-width: 860px) { .vision-mark { margin-top: 28px; } .vision-mark svg { width: 64px; height: 64px; } }
+.view-illust.is-tall { width: auto; height: clamp(240px, 26vw, 340px); }
