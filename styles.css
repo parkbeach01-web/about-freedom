@@ -388,8 +388,8 @@ input[type="radio"], input[type="checkbox"] { accent-color: var(--accent); width
 
 /* 비전 */
 .vision { padding: clamp(110px, 14vw, 180px) 0; color: var(--on-dark);
-  background: linear-gradient(180deg, rgba(17, 27, 52, .78) 0%, rgba(17, 27, 52, .52) 55%, rgba(17, 27, 52, .82) 100%),
-    url("https://images.unsplash.com/photo-1561324555-88df4bfae809?auto=format&fit=crop&w=2000&q=70") center 58% / cover no-repeat, var(--accent-dark); }
+  background: linear-gradient(180deg, rgba(17, 27, 52, .72) 0%, rgba(17, 27, 52, .45) 55%, rgba(17, 27, 52, .78) 100%),
+    url("images/vision-pier.jpg") center 60% / cover no-repeat, var(--accent-dark); }
 .vision .eyebrow { color: var(--star); }
 .vision h2 { color: #fff; }
 .vision-credit { margin-top: clamp(48px, 7vw, 80px); font-size: 12px; color: rgba(243, 244, 248, .55); }
