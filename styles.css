@@ -387,12 +387,18 @@ input[type="radio"], input[type="checkbox"] { accent-color: var(--accent); width
 /* 상황별 니즈 */
 
 /* 비전 */
-.vision { padding: var(--section) 0; border-top: 1px solid var(--line); }
+.vision { padding: clamp(110px, 14vw, 180px) 0; color: var(--on-dark);
+  background: linear-gradient(180deg, rgba(17, 27, 52, .78) 0%, rgba(17, 27, 52, .52) 55%, rgba(17, 27, 52, .82) 100%),
+    url("https://images.unsplash.com/photo-1561324555-88df4bfae809?auto=format&fit=crop&w=2000&q=70") center 58% / cover no-repeat, var(--accent-dark); }
+.vision .eyebrow { color: var(--star); }
+.vision h2 { color: #fff; }
+.vision-credit { margin-top: clamp(48px, 7vw, 80px); font-size: 12px; color: rgba(243, 244, 248, .55); }
+.vision-credit a { color: inherit; }
 .vision-grid { display: grid; grid-template-columns: 5fr 7fr; gap: clamp(32px, 6vw, 88px); align-items: start; }
 .vision-body { padding-top: 34px; }
-.vision-body p { color: var(--muted); font-size: 17px; line-height: 1.8; max-width: 34em; }
+.vision-body p { color: rgba(243, 244, 248, .86); font-size: 17px; line-height: 1.8; max-width: 34em; }
 .vision-body p + p { margin-top: 1em; }
-.vision-body .vision-ambition { color: var(--ink); font-weight: 700; font-size: 20px; letter-spacing: -0.02em; margin-top: 1.4em; }
+.vision-body .vision-ambition { color: #fff; font-weight: 700; font-size: 20px; letter-spacing: -0.02em; margin-top: 1.4em; }
 .roadmap { list-style: none; margin: 32px 0 0; padding: 0; border-top: 1px solid var(--line); }
 .roadmap li { display: grid; grid-template-columns: 72px 180px 1fr; gap: 16px; align-items: baseline; padding: 16px 0; border-bottom: 1px solid var(--line); }
 .roadmap strong { font-size: 16px; }
@@ -407,8 +413,8 @@ input[type="radio"], input[type="checkbox"] { accent-color: var(--accent); width
 
 /* 코칭 방법 3단계 */
 .vision-mark { margin: 48px 0 0; max-width: 300px; }
-.vision-mark svg { width: 72px; height: 72px; color: var(--accent); display: block; }
-.vision-mark svg path:first-child { fill: var(--star-deep); }
+.vision-mark svg { width: 72px; height: 72px; color: var(--on-dark); display: block; }
+.vision-mark svg path:first-child { fill: var(--star); }
 .vision-mark figcaption { margin-top: 18px; color: var(--muted); font-size: 15px; line-height: 1.7; }
 @media (max-width: 860px) { .vision-mark { margin-top: 28px; } .vision-mark svg { width: 64px; height: 64px; } }
 .view-illust.is-tall { width: auto; height: clamp(240px, 26vw, 340px); }
