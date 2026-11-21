@@ -15,7 +15,7 @@ const ENDPOINT = "https://script.google.com/macros/s/AKfycbw7o7JQjhFea9Zp4bNUuRP
     email: "이메일 주소를 확인해 주세요.",
     age: "나이대를 선택해 주세요.",
     career: "연차를 선택해 주세요.",
-    concern: "지금 가장 큰 고민을 한두 줄 적어주세요.",
+    concern: "지금 가장 큰 고민을 적어주세요.",
     mode: "희망 방식을 선택해 주세요.",
     callTime: "통화 가능한 시간대를 적어주세요.",
     consent: "개인정보 수집과 이용에 동의해 주셔야 신청할 수 있습니다."
