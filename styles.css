@@ -412,12 +412,6 @@ input[type="radio"], input[type="checkbox"] { accent-color: var(--accent); width
 }
 
 /* 코칭 방법 3단계 */
-.method-steps { list-style: none; margin: clamp(48px, 7vw, 80px) 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-.method-steps li { background: var(--bg); border-radius: var(--r-lg); padding: 28px 26px 30px; }
-.method-num { display: inline-grid; place-items: center; width: 32px; height: 32px; border-radius: 999px; background: var(--accent); color: #fff; font-weight: 700; font-size: 15px; margin-bottom: 16px; }
-.method-steps strong { display: block; font-size: 19px; letter-spacing: -0.02em; }
-.method-steps p { color: var(--muted); font-size: 15px; margin-top: 10px; line-height: 1.7; }
-@media (max-width: 860px) { .method-steps { grid-template-columns: 1fr; } }
 .vision-mark { margin: 48px 0 0; max-width: 300px; }
 .vision-mark svg { width: 72px; height: 72px; color: var(--accent); display: block; }
 .vision-mark figcaption { margin-top: 18px; color: var(--muted); font-size: 15px; line-height: 1.7; }
